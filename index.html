@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>电子木鱼Pro - 功德无量</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Serif SC', serif;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+            user-select: none;
+        }
+
+        .background-pattern {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.05;
+            background-image: 
+                radial-gradient(circle at 25% 25%, #D4AF37 0%, transparent 50%),
+                radial-gradient(circle at 75% 75%, #D4AF37 0%, transparent 50%);
+            background-size: 100px 100px;
+            animation: float 20s ease-in-out infinite;
+            z-index: 0;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+
+        header {
+            text-align: center;
+            padding: 2rem 1rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .title {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 700;
+            background: linear-gradient(45deg, #D4AF37, #F4E67A, #D4AF37);
+            background-size: 200% 200%;
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shimmer 3s ease-in-out infinite;
+            text-shadow: 0 0 30px rgba(212, 175, 55, 0.3);
+        }
+
+        @keyframes shimmer {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .subtitle {
+            color: #B8860B;
+            font-size: 1.2rem;
+            margin-top: 0.5rem;
+            opacity: 0.8;
+        }
+
+        main {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 60vh;
+            position: relative;
+            z-index: 2;
+            padding: 0 1rem;
+        }
+
+        .stats {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .stat-item {
+            background: rgba(212, 175, 55, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            padding: 1rem 1.5rem;
+            border-radius: 15px;
+            text-align: center;
+            min-width: 120px;
+        }
+
+        .stat-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #D4AF37;
+            display: block;
+        }
+
+        .stat-label {
+            color: #B8860B;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        .muyu-container {
+            position: relative;
+            margin: 2rem 0;
+        }
+
+        .muyu {
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle at 30% 30%, #8B4513, #654321, #3E2723);
+            border-radius: 50%;
+            cursor: pointer;
+            position: relative;
+            box-shadow: 
+                0 20px 40px rgba(0, 0, 0, 0.3),
+                inset 0 0 20px rgba(139, 69, 19, 0.5),
+                0 0 0 3px rgba(212, 175, 55, 0.3);
+            transition: all 0.1s ease;
+            user-select: none;
+            overflow: hidden;
+        }
+
+        .muyu:hover {
+            transform: scale(1.05);
+            box-shadow: 
+                0 25px 50px rgba(0, 0, 0, 0.4),
+                inset 0 0 25px rgba(139, 69, 19, 0.6),
+                0 0 0 5px rgba(212, 175, 55, 0.5);
+        }
+
+        .muyu:active {
+            transform: scale(0.95);
+            box-shadow: 
+                0 10px 20px rgba(0, 0, 0, 0.2),
+                inset 0 0 15px rgba(139, 69, 19, 0.4);
+        }
+
+        .muyu::before {
+            content: '🪵';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 3rem;
+            filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.3));
+        }
+
+        .muyu.critical {
+            animation: critical-shake 0.5s ease-in-out;
+        }
+
+        @keyframes critical-shake {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            25% { transform: scale(1.1) rotate(-5deg); }
+            75% { transform: scale(1.1) rotate(5deg); }
+        }
+
+        .muyu.combo {
+            animation: combo-glow 0.5s ease-in-out;
+        }
+
+        @keyframes combo-glow {
+            0%, 100% { 
+                box-shadow: 
+                    0 20px 40px rgba(0, 0, 0, 0.3),
+                    inset 0 0 20px rgba(139, 69, 19, 0.5),
+                    0 0 0 3px rgba(212, 175, 55, 0.3);
+            }
+            50% { 
+                box-shadow: 
+                    0 20px 60px rgba(212, 175, 55, 0.6),
+                    inset 0 0 30px rgba(212, 175, 55, 0.3),
+                    0 0 0 10px rgba(212, 175, 55, 0.8),
+                    0 0 50px rgba(212, 175, 55, 0.4);
+            }
+        }
+
+        .text-bubble {
+            position: absolute;
+            background: rgba(212, 175, 55, 0.9);
+            color: #1a1a1a;
+            padding: 0.8rem 1.2rem;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            white-space: nowrap;
+            pointer-events: none;
+            animation: bubble-rise 2s ease-out forwards;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 5px 20px rgba(212, 175, 55, 0.3);
+            z-index: 10;
+        }
+
+        @keyframes bubble-rise {
+            0% {
+                opacity: 0;
+                transform: translateY(0) scale(0.5);
+            }
+            20% {
+                opacity: 1;
+                transform: translateY(-20px) scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-100px) scale(0.8);
+            }
+        }
+
+        .achievements {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(212, 175, 55, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            padding: 1rem;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            color: #D4AF37;
+            max-width: 250px;
+            z-index: 3;
+        }
+
+        .achievement-item {
+            margin: 0.5rem 0;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #D4AF37;
+            border-radius: 50%;
+            opacity: 0;
+            animation: particle-fall 3s linear forwards;
+        }
+
+        @keyframes particle-fall {
+            0% {
+                opacity: 1;
+                transform: translateY(-10px) scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(100vh) scale(0);
+            }
+        }
+
+        .combo-counter {
+            position: absolute;
+            top: -60px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #D4AF37;
+            font-size: 1.5rem;
+            font-weight: 700;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .combo-counter.show {
+            opacity: 1;
+            animation: combo-pulse 0.5s ease-in-out;
+        }
+
+        @keyframes combo-pulse {
+            0%, 100% { transform: translateX(-50%) scale(1); }
+            50% { transform: translateX(-50%) scale(1.2); }
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: #B8860B;
+            position: relative;
+            z-index: 2;
+        }
+
+        .version {
+            font-size: 0.8rem;
+            opacity: 0.6;
+        }
+
+        @media (max-width: 768px) {
+            .muyu {
+                width: 150px;
+                height: 150px;
+            }
+            
+            .muyu::before {
+                font-size: 2.5rem;
+            }
+            
+            .achievements {
+                position: static;
+                margin: 2rem auto;
+                max-width: 90%;
+            }
+            
+            .stats {
+                gap: 1rem;
+            }
+            
+            .stat-item {
+                padding: 0.8rem 1rem;
+                min-width: 100px;
+            }
+        }
+
+        .flash-effect {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(212, 175, 55, 0.3);
+            opacity: 0;
+            pointer-events: none;
+            z-index: 999;
+        }
+
+        .flash-effect.active {
+            animation: flash 0.3s ease-out;
+        }
+
+        @keyframes flash {
+            0% { opacity: 0; }
+            50% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="background-pattern"></div>
+    <div class="particles" id="particles"></div>
+    <div class="flash-effect" id="flashEffect"></div>
+
+    <header>
+        <h1 class="title">电子木鱼Pro</h1>
+        <p class="subtitle">功德无量 · 解压神器</p>
+    </header>
+
+    <main>
+        <div class="stats">
+            <div class="stat-item">
+                <span class="stat-value" id="merit">0</span>
+                <div class="stat-label">总功德</div>
+            </div>
+            <div class="stat-item">
+                <span class="stat-value" id="clicks">0</span>
+                <div class="stat-label">敲击次数</div>
+            </div>
+            <div class="stat-item">
+                <span class="stat-value" id="maxCombo">0</span>
+                <div class="stat-label">最高连击</div>
+            </div>
+        </div>
+
+        <div class="muyu-container">
+            <div class="combo-counter" id="comboCounter">连击 x0</div>
+            <div class="muyu" id="muyu"></div>
+        </div>
+    </main>
+
+    <div class="achievements">
+        <h3><i class="fas fa-trophy"></i> 成就</h3>
+        <div class="achievement-item">
+            <span>初心者</span>
+            <span id="achievement1">0/10</span>
+        </div>
+        <div class="achievement-item">
+            <span>修行者</span>
+            <span id="achievement2">0/100</span>
+        </div>
+        <div class="achievement-item">
+            <span>大师</span>
+            <span id="achievement3">0/1000</span>
+        </div>
+        <div class="achievement-item">
+            <span>连击王</span>
+            <span id="achievement4">0/20</span>
+        </div>
+    </div>
+
+    <footer>
+        <p>愿所有众生功德圆满 🙏</p>
+        <p class="version">v1.0 - 专为打工人和学生设计</p>
+    </footer>
+
+    <script>
+        class ElectronicMuyu {
+            constructor() {
+                this.merit = parseInt(localStorage.getItem('merit') || '0');
+                this.totalClicks = parseInt(localStorage.getItem('totalClicks') || '0');
+                this.maxCombo = parseInt(localStorage.getItem('maxCombo') || '0');
+                this.currentCombo = 0;
+                this.lastClickTime = 0;
+                this.comboTimeout = null;
+                
+                this.muyu = document.getElementById('muyu');
+                this.meritDisplay = document.getElementById('merit');
+                this.clicksDisplay = document.getElementById('clicks');
+                this.maxComboDisplay = document.getElementById('maxCombo');
+                this.comboCounter = document.getElementById('comboCounter');
+                this.flashEffect = document.getElementById('flashEffect');
+                
+                this.textBubbles = [];
+                this.maxBubbles = 3;
+                
+                this.initializeAudio();
+                this.updateDisplay();
+                this.updateAchievements();
+                this.bindEvents();
+            }
+
+            initializeAudio() {
+                // 创建音频上下文
+                this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                
+                // 预设音效频率
+                this.sounds = {
+                    normal: { frequency: 200, duration: 0.3 },
+                    critical: { frequency: 100, duration: 0.5 },
+                    combo: { frequency: 400, duration: 0.7 }
+                };
+            }
+
+            playSound(type = 'normal') {
+                if (!this.audioContext) return;
+                
+                const sound = this.sounds[type];
+                const oscillator = this.audioContext.createOscillator();
+                const gainNode = this.audioContext.createGain();
+                
+                oscillator.connect(gainNode);
+                gainNode.connect(this.audioContext.destination);
+                
+                oscillator.frequency.setValueAtTime(sound.frequency, this.audioContext.currentTime);
+                oscillator.type = 'sine';
+                
+                gainNode.gain.setValueAtTime(0.3, this.audioContext.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, this.audioContext.currentTime + sound.duration);
+                
+                oscillator.start(this.audioContext.currentTime);
+                oscillator.stop(this.audioContext.currentTime + sound.duration);
+            }
+
+            bindEvents() {
+                this.muyu.addEventListener('click', (e) => this.handleClick(e));
+                
+                // 防止右键菜单
+                this.muyu.addEventListener('contextmenu', (e) => e.preventDefault());
+                
+                // 处理触摸设备
+                this.muyu.addEventListener('touchstart', (e) => {
+                    e.preventDefault();
+                    this.handleClick(e);
+                });
+            }
+
+            handleClick(e) {
+                // 恢复音频上下文（某些浏览器需要用户交互才能播放音频）
+                if (this.audioContext.state === 'suspended') {
+                    this.audioContext.resume();
+                }
+
+                const now = Date.now();
+                const timeDiff = now - this.lastClickTime;
+                
+                // 连击检测（500ms内算连击）
+                if (timeDiff < 500) {
+                    this.currentCombo++;
+                } else {
+                    this.currentCombo = 1;
+                }
+                
+                this.lastClickTime = now;
+                
+                // 重置连击计时器
+                clearTimeout(this.comboTimeout);
+                this.comboTimeout = setTimeout(() => {
+                    this.currentCombo = 0;
+                    this.updateComboDisplay();
+                }, 500);
+                
+                // 更新最高连击
+                if (this.currentCombo > this.maxCombo) {
+                    this.maxCombo = this.currentCombo;
+                }
+                
+                // 判断类型和奖励
+                let isCritical = Math.random() < 0.1; // 10% 暴击率
+                let isCombo = this.currentCombo >= 5;
+                
+                let meritGain = 1;
+                let message = this.getRandomMessage('normal');
+                
+                if (isCombo) {
+                    meritGain = this.currentCombo * 5;
+                    message = this.getRandomMessage('combo');
+                    this.playSound('combo');
+                    this.muyu.classList.add('combo');
+                    this.createParticles(30);
+                } else if (isCritical) {
+                    meritGain = Math.floor(Math.random() * 100) + 50;
+                    message = this.getRandomMessage('critical');
+                    this.playSound('critical');
+                    this.muyu.classList.add('critical');
+                    this.flashEffect.classList.add('active');
+                    this.createParticles(15);
+                } else {
+                    this.playSound('normal');
+                    this.createParticles(5);
+                }
+                
+                // 更新数据
+                this.merit += meritGain;
+                this.totalClicks++;
+                
+                // 显示文字气泡
+                this.showTextBubble(message + ` +${meritGain}`, e);
+                
+                // 更新显示
+                this.updateDisplay();
+                this.updateComboDisplay();
+                this.updateAchievements();
+                this.saveData();
+                
+                // 移除动画类
+                setTimeout(() => {
+                    this.muyu.classList.remove('critical', 'combo');
+                    this.flashEffect.classList.remove('active');
+                }, 500);
+            }
+
+            getRandomMessage(type) {
+                const messages = {
+                    normal: [
+                        '南无阿弥陀佛', '功德+1', '心如止水', '佛光普照',
+                        '消除业障', '积德行善', '内心平静', '福慧双修'
+                    ],
+                    critical: [
+                        '老板暴毙，功德+100', 'KPI清零，天降福报', '论文自动写完，功德+50',
+                        '教授突然不点名，功德+20', '天劫化解，功德+999', '顿悟成佛，直接开摆',
+                        '系统检测到暴击', '功德暴增！', '天降神迹！'
+                    ],
+                    combo: [
+                        '功德无量，原地飞升', '系统检测到您已开悟', '连击成佛',
+                        '梵音阵阵，功德连连', '佛法无边', '慧根深厚',
+                        '修为大进！', '道行日深！'
+                    ]
+                };
+                
+                const messageArray = messages[type];
+                return messageArray[Math.floor(Math.random() * messageArray.length)];
+            }
+
+            showTextBubble(text, event) {
+                // 限制气泡数量
+                if (this.textBubbles.length >= this.maxBubbles) {
+                    const oldBubble = this.textBubbles.shift();
+                    if (oldBubble && oldBubble.parentNode) {
+                        oldBubble.parentNode.removeChild(oldBubble);
+                    }
+                }
+                
+                const bubble = document.createElement('div');
+                bubble.className = 'text-bubble';
+                bubble.textContent = text;
+                
+                // 随机位置
+                const rect = this.muyu.getBoundingClientRect();
+                const x = rect.left + Math.random() * rect.width;
+                const y = rect.top - 50;
+                
+                bubble.style.left = x + 'px';
+                bubble.style.top = y + 'px';
+                bubble.style.transform = 'translateX(-50%)';
+                
+                document.body.appendChild(bubble);
+                this.textBubbles.push(bubble);
+                
+                // 2秒后移除
+                setTimeout(() => {
+                    if (bubble.parentNode) {
+                        bubble.parentNode.removeChild(bubble);
+                        const index = this.textBubbles.indexOf(bubble);
+                        if (index > -1) {
+                            this.textBubbles.splice(index, 1);
+                        }
+                    }
+                }, 2000);
+            }
+
+            createParticles(count) {
+                const particles = document.getElementById('particles');
+                
+                for (let i = 0; i < count; i++) {
+                    const particle = document.createElement('div');
+                    particle.className = 'particle';
+                    
+                    const x = Math.random() * window.innerWidth;
+                    const delay = Math.random() * 0.5;
+                    
+                    particle.style.left = x + 'px';
+                    particle.style.animationDelay = delay + 's';
+                    
+                    particles.appendChild(particle);
+                    
+                    // 3秒后移除粒子
+                    setTimeout(() => {
+                        if (particle.parentNode) {
+                            particle.parentNode.removeChild(particle);
+                        }
+                    }, 3000 + delay * 1000);
+                }
+            }
+
+            updateDisplay() {
+                this.meritDisplay.textContent = this.merit.toLocaleString();
+                this.clicksDisplay.textContent = this.totalClicks.toLocaleString();
+                this.maxComboDisplay.textContent = this.maxCombo;
+            }
+
+            updateComboDisplay() {
+                if (this.currentCombo > 0) {
+                    this.comboCounter.textContent = `连击 x${this.currentCombo}`;
+                    this.comboCounter.classList.add('show');
+                } else {
+                    this.comboCounter.classList.remove('show');
+                }
+            }
+
+            updateAchievements() {
+                // 初心者: 敲击10次
+                const achievement1 = Math.min(this.totalClicks, 10);
+                document.getElementById('achievement1').textContent = `${achievement1}/10`;
+                
+                // 修行者: 敲击100次
+                const achievement2 = Math.min(this.totalClicks, 100);
+                document.getElementById('achievement2').textContent = `${achievement2}/100`;
+                
+                // 大师: 敲击1000次
+                const achievement3 = Math.min(this.totalClicks, 1000);
+                document.getElementById('achievement3').textContent = `${achievement3}/1000`;
+                
+                // 连击王: 20连击
+                const achievement4 = Math.min(this.maxCombo, 20);
+                document.getElementById('achievement4').textContent = `${achievement4}/20`;
+                
+                // 佛光普照效果 (100次敲击后解锁)
+                if (this.totalClicks >= 100) {
+                    document.body.style.background = 'linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 50%, #3a2d1a 100%)';
+                }
+            }
+
+            saveData() {
+                localStorage.setItem('merit', this.merit.toString());
+                localStorage.setItem('totalClicks', this.totalClicks.toString());
+                localStorage.setItem('maxCombo', this.maxCombo.toString());
+            }
+        }
+
+        // 页面加载完成后初始化
+        document.addEventListener('DOMContentLoaded', () => {
+            new ElectronicMuyu();
+        });
+
+        // 添加一些额外的交互效果
+        document.addEventListener('keydown', (e) => {
+            if (e.code === 'Space') {
+                e.preventDefault();
+                document.getElementById('muyu').click();
+            }
+        });
+    </script>
+</body>
+</html> 
