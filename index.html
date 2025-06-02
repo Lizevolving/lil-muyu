@@ -36,6 +36,7 @@
             background-size: 200px 200px;
             animation: float 20s ease-in-out infinite;
             z-index: 0;
+            will-change: transform;
         }
 
         @keyframes float {
@@ -69,9 +70,28 @@
 
         .subtitle {
             color: #B8860B;
-            font-size: 1.2rem;
+            font-size: 1rem;
             margin-top: 0.5rem;
             opacity: 0.8;
+        }
+
+        .easter-egg-message {
+            color: #D4AF37;
+            font-size: 1.2rem;
+            font-weight: 700;
+            opacity: 0;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            transition: opacity 0.5s ease;
+            text-shadow: 0 0 20px rgba(212, 175, 55, 0.6);
+            cursor: pointer;
+            z-index: 10;
+        }
+
+        .easter-egg-message.show {
+            opacity: 1;
         }
 
         main {
@@ -86,8 +106,8 @@
 
         .stats {
             display: flex;
-            gap: 2rem;
-            margin-bottom: 3rem;
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
             flex-wrap: wrap;
             justify-content: center;
         }
@@ -97,14 +117,14 @@
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             border: 1px solid rgba(212, 175, 55, 0.3);
-            padding: 1rem 1.5rem;
-            border-radius: 15px;
+            padding: 0.8rem 1.2rem;
+            border-radius: 12px;
             text-align: center;
-            min-width: 120px;
+            min-width: 100px;
         }
 
         .stat-value {
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             font-weight: 700;
             color: #D4AF37;
             display: block;
@@ -112,8 +132,8 @@
 
         .stat-label {
             color: #B8860B;
-            font-size: 0.9rem;
-            margin-top: 0.5rem;
+            font-size: 0.8rem;
+            margin-top: 0.3rem;
         }
 
         .muyu-container {
@@ -136,6 +156,16 @@
             user-select: none;
             -webkit-user-select: none;
             overflow: hidden;
+        }
+
+        .muyu.idle {
+            animation: idle-sway 6s ease-in-out infinite;
+        }
+
+        @keyframes idle-sway {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(-2deg); }
+            75% { transform: rotate(2deg); }
         }
 
         .muyu:hover {
@@ -256,6 +286,106 @@
             }
         }
 
+        /* 爆发型动画 */
+        .muyu.crack {
+            animation: crack-effect 1.2s ease-out;
+        }
+
+        @keyframes crack-effect {
+            0% { 
+                transform: scale(1);
+                box-shadow: 
+                    0 20px 40px rgba(0, 0, 0, 0.3),
+                    inset 0 0 20px rgba(139, 69, 19, 0.5),
+                    0 0 0 3px rgba(212, 175, 55, 0.3);
+            }
+            15% {
+                transform: scale(1.05);
+                box-shadow: 
+                    0 20px 40px rgba(0, 0, 0, 0.3),
+                    inset 0 0 20px rgba(139, 69, 19, 0.5),
+                    0 0 0 3px rgba(212, 175, 55, 0.3),
+                    inset 0 0 0 2px rgba(255, 255, 255, 0.8),
+                    inset -20px 0 0 rgba(0, 0, 0, 0.3),
+                    inset 20px 0 0 rgba(0, 0, 0, 0.3),
+                    inset 0 -20px 0 rgba(0, 0, 0, 0.3);
+            }
+            30% {
+                transform: scale(1.1);
+                box-shadow: 
+                    0 25px 50px rgba(0, 0, 0, 0.4),
+                    inset 0 0 25px rgba(139, 69, 19, 0.6),
+                    0 0 0 5px rgba(212, 175, 55, 0.5),
+                    inset 0 0 0 3px rgba(255, 255, 255, 0.9),
+                    inset -25px 0 0 rgba(0, 0, 0, 0.5),
+                    inset 25px 0 0 rgba(0, 0, 0, 0.5),
+                    inset 0 -25px 0 rgba(0, 0, 0, 0.5),
+                    inset 0 25px 0 rgba(0, 0, 0, 0.5);
+            }
+            60% {
+                transform: scale(1.05);
+                box-shadow: 
+                    0 22px 45px rgba(0, 0, 0, 0.35),
+                    inset 0 0 22px rgba(139, 69, 19, 0.55),
+                    0 0 0 4px rgba(212, 175, 55, 0.4),
+                    inset 0 0 0 2px rgba(255, 255, 255, 0.6),
+                    inset -15px 0 0 rgba(0, 0, 0, 0.2),
+                    inset 15px 0 0 rgba(0, 0, 0, 0.2);
+            }
+            100% { 
+                transform: scale(1);
+                box-shadow: 
+                    0 20px 40px rgba(0, 0, 0, 0.3),
+                    inset 0 0 20px rgba(139, 69, 19, 0.5),
+                    0 0 0 3px rgba(212, 175, 55, 0.3);
+            }
+        }
+
+        .muyu.spin-blast {
+            animation: spin-blast-effect 1.2s ease-out;
+        }
+
+        @keyframes spin-blast-effect {
+            0% { 
+                transform: scale(1) rotate(0deg);
+                box-shadow: 
+                    0 20px 40px rgba(0, 0, 0, 0.3),
+                    inset 0 0 20px rgba(139, 69, 19, 0.5),
+                    0 0 0 3px rgba(212, 175, 55, 0.3);
+            }
+            25% {
+                transform: scale(1.3) rotate(180deg);
+                box-shadow: 
+                    0 35px 70px rgba(212, 175, 55, 0.6),
+                    inset 0 0 35px rgba(212, 175, 55, 0.4),
+                    0 0 0 12px rgba(212, 175, 55, 0.8),
+                    0 0 80px rgba(212, 175, 55, 0.6);
+            }
+            50% {
+                transform: scale(1.5) rotate(360deg);
+                box-shadow: 
+                    0 40px 80px rgba(212, 175, 55, 0.8),
+                    inset 0 0 40px rgba(212, 175, 55, 0.5),
+                    0 0 0 15px rgba(212, 175, 55, 1),
+                    0 0 100px rgba(212, 175, 55, 0.8);
+            }
+            75% {
+                transform: scale(1.2) rotate(540deg);
+                box-shadow: 
+                    0 30px 60px rgba(212, 175, 55, 0.5),
+                    inset 0 0 30px rgba(212, 175, 55, 0.3),
+                    0 0 0 8px rgba(212, 175, 55, 0.6),
+                    0 0 60px rgba(212, 175, 55, 0.4);
+            }
+            100% { 
+                transform: scale(1) rotate(720deg);
+                box-shadow: 
+                    0 20px 40px rgba(0, 0, 0, 0.3),
+                    inset 0 0 20px rgba(139, 69, 19, 0.5),
+                    0 0 0 3px rgba(212, 175, 55, 0.3);
+            }
+        }
+
         .text-bubble {
             position: absolute;
             background: rgba(212, 175, 55, 0.9);
@@ -266,7 +396,7 @@
             font-size: 1.1rem;
             white-space: nowrap;
             pointer-events: none;
-            animation: bubble-rise 2s ease-out forwards;
+            animation: bubble-rise 3s ease-out forwards;
             backdrop-filter: blur(5px);
             -webkit-backdrop-filter: blur(5px);
             box-shadow: 0 5px 20px rgba(212, 175, 55, 0.3);
@@ -278,13 +408,13 @@
                 opacity: 0;
                 transform: translateY(0) scale(0.5);
             }
-            20% {
+            15% {
                 opacity: 1;
-                transform: translateY(-20px) scale(1);
+                transform: translateY(-30px) scale(1);
             }
             100% {
                 opacity: 0;
-                transform: translateY(-100px) scale(0.8);
+                transform: translateY(-150px) scale(0.8);
             }
         }
 
@@ -417,14 +547,18 @@
             animation: popup-show 0.3s ease-out forwards;
         }
 
-        @keyframes popup-show {
+        .share-popup.fade-out {
+            animation: popup-hide 0.5s ease-out forwards;
+        }
+
+        @keyframes popup-hide {
             0% {
-                opacity: 0;
-                transform: translate(-50%, -50%) scale(0.8);
-            }
-            100% {
                 opacity: 1;
                 transform: translate(-50%, -50%) scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(0.9);
             }
         }
 
@@ -440,9 +574,13 @@
             animation: overlay-show 0.3s ease-out forwards;
         }
 
-        @keyframes overlay-show {
-            0% { opacity: 0; }
-            100% { opacity: 1; }
+        .popup-overlay.fade-out {
+            animation: overlay-hide 0.5s ease-out forwards;
+        }
+
+        @keyframes overlay-hide {
+            0% { opacity: 1; }
+            100% { opacity: 0; }
         }
 
         @media (max-width: 768px) {
@@ -466,8 +604,16 @@
             }
             
             .stat-item {
-                padding: 0.8rem 1rem;
-                min-width: 100px;
+                padding: 0.6rem 0.8rem;
+                min-width: 85px;
+            }
+
+            .stat-value {
+                font-size: 1.3rem;
+            }
+
+            .stat-label {
+                font-size: 0.75rem;
             }
 
             .combo-counter {
@@ -475,7 +621,7 @@
                 line-height: 1.2;
             }
 
-            footer {
+            .footer {
                 padding: 3rem 1rem 2rem;
                 margin-top: 3rem;
             }
@@ -507,6 +653,86 @@
             50% { opacity: 1; }
             100% { opacity: 0; }
         }
+
+        /* About Modal Styles */
+        .about-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            z-index: 2000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .about-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%;
+            max-width: 800px;
+            max-height: 80vh;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            overflow: hidden;
+        }
+
+        .about-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2rem;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+            background: linear-gradient(90deg, rgba(212, 175, 55, 0.1), transparent);
+        }
+
+        .about-header h2 {
+            color: #D4AF37;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .about-close {
+            background: none;
+            border: none;
+            color: #D4AF37;
+            font-size: 2rem;
+            cursor: pointer;
+            padding: 0;
+            line-height: 1;
+            transition: all 0.3s ease;
+        }
+
+        .about-close:hover {
+            color: #F4E67A;
+            transform: scale(1.1);
+        }
+
+        .about-body {
+            padding: 2rem;
+            overflow-y: auto;
+            max-height: calc(80vh - 100px);
+            color: #E0E0E0;
+            line-height: 1.6;
+        }
+
+        /* CSS Variables for About Content */
+        :root {
+            --text-primary: #E0E0E0;
+            --text-secondary: #B8860B;
+            --accent-color: #D4AF37;
+            --bg-secondary: rgba(212, 175, 55, 0.1);
+            --border-color: rgba(212, 175, 55, 0.2);
+        }
     </style>
 </head>
 <body>
@@ -515,7 +741,8 @@
     <div class="flash-effect" id="flashEffect"></div>
 
     <header>
-        <h1 class="title">电子木鱼Pro</h1>
+        <h1 class="title" id="logoTitle">电子木鱼Pro</h1>
+        <div class="easter-egg-message" id="easterEggMessage">👋🏻 恭喜发现终极功德彩蛋！</div>
         <p class="subtitle">功德无量 · 解压神器</p>
     </header>
 
@@ -558,8 +785,21 @@
 
     <footer>
         <p>愿所有众生功德圆满 🙏</p>
-        <p class="version">v1.0 - 专为打工人和学生设计</p>
+        <p class="version">专为打工人和牛马大学生设计</p>
     </footer>
+
+    <!-- About Modal -->
+    <div id="aboutModal" class="about-modal">
+        <div class="about-content">
+            <div class="about-header">
+                <h2>关于电子木鱼Pro</h2>
+                <button class="about-close" onclick="hideAbout()">×</button>
+            </div>
+            <div id="aboutContent" class="about-body">
+                <!-- Content will be loaded here -->
+            </div>
+        </div>
+    </div>
 
     <script>
         class ElectronicMuyu {
@@ -571,6 +811,15 @@
                 this.lastClickTime = 0;
                 this.comboTimeout = null;
                 
+                // 空闲和爆发型动画控制
+                this.idleTimeout = null;
+                this.lastBlastTime = 0;
+                this.blastCooldown = 8000; // 8秒冷却
+                
+                // LOGO彩蛋检测
+                this.logoClicks = [];
+                this.easterEggActive = false;
+                
                 this.muyu = document.getElementById('muyu');
                 this.meritDisplay = document.getElementById('merit');
                 this.clicksDisplay = document.getElementById('clicks');
@@ -578,6 +827,8 @@
                 this.comboCounter = document.getElementById('comboCounter');
                 this.flashEffect = document.getElementById('flashEffect');
                 this.shareBtn = document.getElementById('shareBtn');
+                this.logoTitle = document.getElementById('logoTitle');
+                this.easterEggMessage = document.getElementById('easterEggMessage');
                 
                 this.textBubbles = [];
                 this.maxBubbles = 3;
@@ -587,22 +838,29 @@
                 this.updateDisplay();
                 this.updateAchievements();
                 this.bindEvents();
+                this.startIdleTimer();
             }
 
             initializeAudio() {
                 // 创建音频上下文
                 this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
                 
-                // 预设音效频率
+                // 扩展音效频率
                 this.sounds = {
                     normal: { frequency: 200, duration: 0.3 },
                     critical: { frequency: 100, duration: 0.5 },
-                    combo: { frequency: 400, duration: 0.7 }
+                    combo: { frequency: 400, duration: 0.7 },
+                    chanting: { baseFrequency: 80, duration: 2.0 } // 诵经嗡鸣
                 };
             }
 
             playSound(type = 'normal') {
                 if (!this.audioContext) return;
+                
+                if (type === 'chanting') {
+                    this.playChantingSound();
+                    return;
+                }
                 
                 const sound = this.sounds[type];
                 const oscillator = this.audioContext.createOscillator();
@@ -621,9 +879,104 @@
                 oscillator.stop(this.audioContext.currentTime + sound.duration);
             }
 
+            playChantingSound() {
+                if (!this.audioContext) return;
+                
+                const sound = this.sounds.chanting;
+                const startTime = this.audioContext.currentTime;
+                
+                // 嗡鸣基底（类似寺庙钟声余韵）- 低频震动
+                const baseOscillator = this.audioContext.createOscillator();
+                const baseGain = this.audioContext.createGain();
+                
+                // 添加混响（模拟大殿空间感）
+                const convolver = this.audioContext.createConvolver();
+                const reverbGain = this.audioContext.createGain();
+                
+                baseOscillator.connect(baseGain);
+                baseGain.connect(reverbGain);
+                reverbGain.connect(this.audioContext.destination);
+                
+                // 基础频率设置
+                baseOscillator.frequency.setValueAtTime(sound.baseFrequency, startTime);
+                baseOscillator.type = 'sawtooth'; // 更丰富的泛音
+                
+                // 随机波动（模拟人声起伏）
+                const lfo = this.audioContext.createOscillator();
+                const lfoGain = this.audioContext.createGain();
+                
+                lfo.connect(lfoGain);
+                lfoGain.connect(baseOscillator.frequency);
+                
+                lfo.frequency.setValueAtTime(0.5, startTime); // 慢速波动
+                lfo.type = 'sine';
+                lfoGain.gain.setValueAtTime(8, startTime); // 轻微频率变化
+                
+                // 包络设计（缓慢渐入渐出）
+                baseGain.gain.setValueAtTime(0, startTime);
+                baseGain.gain.linearRampToValueAtTime(0.15, startTime + 0.3);
+                baseGain.gain.setValueAtTime(0.15, startTime + sound.duration - 0.5);
+                baseGain.gain.exponentialRampToValueAtTime(0.001, startTime + sound.duration);
+                
+                // 混响强度
+                reverbGain.gain.setValueAtTime(0.8, startTime);
+                
+                // 启动音频
+                lfo.start(startTime);
+                baseOscillator.start(startTime);
+                
+                // 设置停止时间
+                setTimeout(() => {
+                    try {
+                        lfo.stop();
+                        baseOscillator.stop();
+                    } catch (e) {
+                        // 忽略已停止的错误
+                    }
+                }, sound.duration * 1000);
+            }
+
+            startIdleTimer() {
+                this.resetIdleTimer();
+            }
+
+            resetIdleTimer() {
+                // 清除空闲动画
+                this.muyu.classList.remove('idle');
+                
+                // 重置计时器
+                clearTimeout(this.idleTimeout);
+                this.idleTimeout = setTimeout(() => {
+                    this.muyu.classList.add('idle');
+                }, 5000); // 5秒后开始摇摆
+            }
+
+            getBlastAnimationType() {
+                const now = Date.now();
+                
+                // 检查冷却时间
+                if (now - this.lastBlastTime < this.blastCooldown) {
+                    return null;
+                }
+                
+                // 30%概率触发爆发型动画
+                if (Math.random() < 0.3) {
+                    this.lastBlastTime = now;
+                    
+                    // 随机选择动画类型
+                    return Math.random() < 0.5 ? 'crack' : 'spin-blast';
+                }
+                
+                return null;
+            }
+
             bindEvents() {
                 this.muyu.addEventListener('click', (e) => this.handleClick(e));
                 this.shareBtn.addEventListener('click', () => this.showSharePopup());
+                
+                // LOGO彩蛋检测
+                this.logoTitle.addEventListener('click', (e) => this.handleLogoClick(e));
+                this.easterEggMessage.addEventListener('click', () => this.showAbout());
                 
                 // 防止右键菜单
                 this.muyu.addEventListener('contextmenu', (e) => e.preventDefault());
@@ -633,9 +986,93 @@
                     e.preventDefault();
                     this.handleClick(e);
                 });
+                
+                // 监听任何用户活动重置空闲计时器
+                ['mousedown', 'touchstart', 'keydown'].forEach(event => {
+                    document.addEventListener(event, () => this.resetIdleTimer());
+                });
+            }
+
+            handleLogoClick(e) {
+                const now = Date.now();
+                this.logoClicks.push(now);
+                
+                // 保留5秒内的点击记录
+                this.logoClicks = this.logoClicks.filter(time => now - time <= 5000);
+                
+                // 检测是否5秒内点击2次以上
+                if (this.logoClicks.length >= 2 && !this.easterEggActive) {
+                    this.triggerEasterEgg();
+                }
+            }
+
+            triggerEasterEgg() {
+                this.easterEggActive = true;
+                
+                // LOGO渐隐
+                this.logoTitle.style.transition = 'opacity 0.5s ease';
+                this.logoTitle.style.opacity = '0';
+                
+                // 彩蛋消息渐显
+                setTimeout(() => {
+                    this.easterEggMessage.classList.add('show');
+                }, 300);
+                
+                // 360度金色粒子射出
+                this.createEasterEggParticles();
+            }
+
+            createEasterEggParticles() {
+                const particles = document.getElementById('particles');
+                const centerX = window.innerWidth / 2;
+                const centerY = window.innerHeight * 0.3; // header区域中心
+                
+                // 创建36个粒子，每10度一个，形成360度圆形
+                for (let i = 0; i < 36; i++) {
+                    const particle = document.createElement('div');
+                    particle.className = 'particle';
+                    particle.style.background = '#D4AF37';
+                    
+                    const angle = (i * 10) * Math.PI / 180; // 转换为弧度
+                    const distance = 200 + Math.random() * 100; // 150-250px随机距离
+                    
+                    const endX = centerX + Math.cos(angle) * distance;
+                    const endY = centerY + Math.sin(angle) * distance;
+                    
+                    particle.style.left = centerX + 'px';
+                    particle.style.top = centerY + 'px';
+                    
+                    // 自定义动画：从中心射向各个方向
+                    particle.style.animation = 'none';
+                    particle.style.transition = 'all 1.5s ease-out';
+                    
+                    particles.appendChild(particle);
+                    
+                    // 触发动画
+                    setTimeout(() => {
+                        particle.style.left = endX + 'px';
+                        particle.style.top = endY + 'px';
+                        particle.style.opacity = '0';
+                        particle.style.transform = 'scale(0)';
+                    }, 50);
+                    
+                    // 清理粒子
+                    setTimeout(() => {
+                        if (particle.parentNode) {
+                            particle.parentNode.removeChild(particle);
+                        }
+                    }, 1600);
+                }
+            }
+
+            showAbout() {
+                showAbout(); // 调用全局函数
             }
 
             handleClick(e) {
+                // 重置空闲计时器
+                this.resetIdleTimer();
+                
                 // 恢复音频上下文（某些浏览器需要用户交互才能播放音频）
                 if (this.audioContext.state === 'suspended') {
                     this.audioContext.resume();
@@ -672,20 +1109,33 @@
                 let meritGain = 1;
                 let message = this.getRandomMessage('normal');
                 
-                // 清除之前的动画类
-                this.muyu.classList.remove('clicked', 'critical', 'combo');
+                // 检查爆发型动画
+                let blastType = null;
+                if (isCombo || isCritical) {
+                    blastType = this.getBlastAnimationType();
+                }
                 
                 if (isCombo) {
                     meritGain = this.currentCombo * 5;
                     message = this.getRandomMessage('combo');
-                    this.playSound('combo');
-                    setTimeout(() => this.muyu.classList.add('combo'), 10);
+                    this.playSound('chanting'); // 使用诵经音效
+                    
+                    if (blastType) {
+                        setTimeout(() => this.muyu.classList.add('combo', blastType), 10);
+                    } else {
+                        setTimeout(() => this.muyu.classList.add('combo'), 10);
+                    }
                     this.createParticles(30);
                 } else if (isCritical) {
                     meritGain = Math.floor(Math.random() * 100) + 50;
                     message = this.getRandomMessage('critical');
-                    this.playSound('critical');
-                    setTimeout(() => this.muyu.classList.add('critical'), 10);
+                    this.playSound('chanting'); // 使用诵经音效
+                    
+                    if (blastType) {
+                        setTimeout(() => this.muyu.classList.add('critical', blastType), 10);
+                    } else {
+                        setTimeout(() => this.muyu.classList.add('critical'), 10);
+                    }
                     this.flashEffect.classList.add('active');
                     this.createParticles(15);
                 } else {
@@ -709,7 +1159,7 @@
                 
                 // 移除动画类
                 setTimeout(() => {
-                    this.muyu.classList.remove('clicked', 'critical', 'combo');
+                    this.muyu.classList.remove('clicked', 'critical', 'combo', 'crack', 'spin-blast');
                     this.flashEffect.classList.remove('active');
                 }, 1200);
             }
@@ -718,24 +1168,26 @@
                 const messages = {
                     normal: [
                         '南无阿弥陀佛', '功德+1', '心如止水', '佛光普照',
-                        '消除业障', '积德行善', '内心平静', '福慧双修',
-                        '一声木鱼，万事皆空', '敲响智慧', '洗涤心灵',
+                        '消除业障', '福慧双修', '一声木鱼，万事皆空',
                         '禅心静虑', '慈悲为怀', '觉悟人生', '返璞归真'
                     ],
-                    critical: [                            // 之所以会出现2条，是因为这里原本就带着"数字"
+                    critical: [
                         '老板暴毙，功德爆棚', 'KPI清零，天降福报', '论文自动写完',
                         '教授突然不点名', '天劫化解，功德无量', '顿悟成佛，直接开摆',
-                        '系统检测到暴击', '功德暴增！', '天降神迹！',
+                        '系统检测到暴击', 
                         '加班取消，今日摸鱼', '考试全会，学霸附体', '工资翻倍，财运亨通',
                         'Bug自愈，代码完美', '作业消失，解脱束缚', '领导请假，自由万岁',
-                        '网速拉满，下载神速', '排队消失，绿灯常亮', '食堂加菜，免费续杯'
+                        '网速拉满，下载神速', '排队消失，绿灯常亮', '食堂加菜，免费续杯',
+                        '翘水课忘找代签，还没被抓', '室友终于洗澡', '食堂阿姨手抖了一下',
+                        '电梯等了3秒就来了', '老师今天心情好不抽查', '图书馆有空调座位了',
+                        '选课秒杀成功了', '快递小哥直接送上楼','外卖提前半小时到了',
+                        '银行卡余额还有钱', '地铁刚好赶上末班车', 
                     ],
                     combo: [
                         '功德无量，原地飞升', '系统检测到您已开悟', '连击成佛',
                         '梵音阵阵，功德连连', '佛法无边', '慧根深厚',
                         '修为大进！', '道行日深！', '连击飞升，直达极乐',
-                        '禅定深入，智慧开启', '功德圆满，成就无上正觉',
-                        '打破轮回，超脱三界', '觉悟圆满，证得佛果'
+                        '禅定深入，智慧开启'
                     ]
                 };
                 
@@ -756,10 +1208,17 @@
                 bubble.className = 'text-bubble';
                 bubble.textContent = `${message} +${meritGain}`;
                 
-                // 随机位置
+                // 随机位置：上方180度扇形范围
                 const rect = this.muyu.getBoundingClientRect();
-                const x = rect.left + Math.random() * rect.width;
-                const y = rect.top - 50;
+                const centerX = rect.left + rect.width / 2;
+                const centerY = rect.top;
+                
+                // 生成-90度到+90度的随机角度（向上的180度扇形）
+                const angle = (Math.random() * 180 - 90) * Math.PI / 180;
+                const distance = 50 + Math.random() * 100; // 50-150px的随机距离
+                
+                const x = centerX + Math.sin(angle) * distance;
+                const y = centerY - Math.abs(Math.cos(angle)) * distance;
                 
                 bubble.style.left = x + 'px';
                 bubble.style.top = y + 'px';
@@ -768,7 +1227,7 @@
                 document.body.appendChild(bubble);
                 this.textBubbles.push(bubble);
                 
-                // 2秒后移除
+                // 3秒后移除
                 setTimeout(() => {
                     if (bubble.parentNode) {
                         bubble.parentNode.removeChild(bubble);
@@ -777,7 +1236,7 @@
                             this.textBubbles.splice(index, 1);
                         }
                     }
-                }, 2000);
+                }, 3000);
             }
 
             createParticles(count) {
@@ -813,6 +1272,10 @@
             updateComboDisplay() {
                 if (this.currentCombo > 0) {
                     this.comboCounter.textContent = `连击 x${this.currentCombo}`;
+                    this.comboCounter.classList.add('show');
+                } else if (this.totalClicks === 0) {
+                    // 新手引导
+                    this.comboCounter.textContent = '👆🏻 开启你的功德之旅吧！';
                     this.comboCounter.classList.add('show');
                 } else {
                     this.comboCounter.classList.remove('show');
@@ -863,17 +1326,21 @@
                     console.log('链接:', shareUrl);
                 }
                 
-                // 3秒后自动关闭
-                setTimeout(() => {
-                    if (overlay.parentNode) overlay.parentNode.removeChild(overlay);
-                    if (popup.parentNode) popup.parentNode.removeChild(popup);
-                }, 3000);
+                // 定义关闭函数
+                const closePopup = () => {
+                    overlay.classList.add('fade-out');
+                    popup.classList.add('fade-out');
+                    setTimeout(() => {
+                        if (overlay.parentNode) overlay.parentNode.removeChild(overlay);
+                        if (popup.parentNode) popup.parentNode.removeChild(popup);
+                    }, 500);
+                };
                 
-                // 点击遮罩层关闭
-                overlay.addEventListener('click', () => {
-                    if (overlay.parentNode) overlay.parentNode.removeChild(overlay);
-                    if (popup.parentNode) popup.parentNode.removeChild(popup);
-                });
+                // 1秒后自动关闭
+                setTimeout(closePopup, 1000);
+                
+                // 点击遮罩层立即关闭
+                overlay.addEventListener('click', closePopup);
             }
 
             saveData() {
@@ -896,6 +1363,195 @@
             }
         }
 
+        // Enhanced markdown to HTML converter
+        function convertMarkdownToHTML(markdown) {
+            let html = markdown
+                // Process code blocks FIRST with special handling
+                .replace(/```(\w+)?\n?([\s\S]*?)```/g, function(match, lang, code) {
+                    const language = lang ? ` class="language-${lang}"` : '';
+                    // Create a temporary element to safely encode HTML
+                    const tempDiv = document.createElement('div');
+                    tempDiv.textContent = code.trim();
+                    return `<pre><code${language}>${tempDiv.innerHTML}</code></pre>`;
+                })
+                // Escape inline code safely
+                .replace(/`([^`]+)`/g, function(match, code) {
+                    const tempDiv = document.createElement('div');
+                    tempDiv.textContent = code;
+                    return `<code>${tempDiv.innerHTML}</code>`;
+                })
+                // Headers (order matters - longer patterns first)
+                .replace(/^### (.*$)/gim, '<h3>$1</h3>')
+                .replace(/^## (.*$)/gim, '<h2>$1</h2>')
+                .replace(/^# (.*$)/gim, '<h1>$1</h1>')
+                // Horizontal rules
+                .replace(/^---+$/gim, '<hr>')
+                // Bold and italic
+                .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+                .replace(/\*([^*]+)\*/g, '<em>$1</em>')
+                // Blockquotes
+                .replace(/^> (.+$)/gim, '<blockquote>$1</blockquote>')
+                // Links
+                .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>')
+                // Lists - improved pattern matching
+                .replace(/^[-*] (.+$)/gim, '<li>$1</li>')
+                .replace(/^\d+\. (.+$)/gim, '<li>$1</li>')
+                // Line breaks
+                .replace(/\n/g, '<br>');
+
+            // Group consecutive list items into ul tags
+            html = html.replace(/(<li>.*?<\/li>(<br>)*)+/gs, function(match) {
+                const cleanMatch = match.replace(/<br>/g, '');
+                return `<ul>${cleanMatch}</ul>`;
+            });
+            
+            // Clean up breaks around block elements
+            html = html.replace(/<br>(<\/?(h[1-6]|hr|pre|blockquote|ul)[^>]*>)/g, '$1')
+                      .replace(/(<\/?(h[1-6]|hr|pre|blockquote|ul)[^>]*>)<br>/g, '$1');
+            
+            return html;
+        }
+
+        // Optimized styles injection
+        function injectAboutStyles() {
+            if (document.querySelector('[data-about-styles]')) return;
+            
+            const style = document.createElement('style');
+            style.setAttribute('data-about-styles', 'true');
+            style.textContent = `
+                #aboutContent {
+                    font-family: inherit;
+                    line-height: 1.7;
+                    color: var(--text-primary);
+                }
+                #aboutContent h1 {
+                    font-size: 2rem;
+                    font-weight: 700;
+                    margin: 0 0 1rem 0;
+                    color: var(--accent-color);
+                    border-bottom: 2px solid var(--border-color);
+                    padding-bottom: 0.5rem;
+                }
+                #aboutContent h2 {
+                    font-size: 1.5rem;
+                    font-weight: 600;
+                    margin: 2rem 0 1rem 0;
+                    color: var(--text-primary);
+                }
+                #aboutContent h3 {
+                    font-size: 1.25rem;
+                    font-weight: 500;
+                    margin: 1.5rem 0 0.75rem 0;
+                    color: var(--text-primary);
+                }
+                #aboutContent blockquote {
+                    margin: 1rem 0;
+                    padding: 1rem 1.5rem;
+                    background-color: var(--bg-secondary);
+                    border-left: 4px solid var(--accent-color);
+                    border-radius: 0 8px 8px 0;
+                    font-style: italic;
+                    color: var(--text-secondary);
+                }
+                #aboutContent code {
+                    background-color: var(--bg-secondary);
+                    color: var(--accent-color);
+                    padding: 0.2rem 0.4rem;
+                    border-radius: 4px;
+                    font-family: 'Monaco', 'Menlo', monospace;
+                    font-size: 0.875rem;
+                    font-weight: 500;
+                }
+                #aboutContent pre {
+                    background-color: var(--bg-secondary);
+                    border: 1px solid var(--border-color);
+                    border-radius: 8px;
+                    padding: 1.5rem;
+                    margin: 1rem 0;
+                    overflow-x: auto;
+                }
+                #aboutContent pre code {
+                    background: none;
+                    color: var(--text-primary);
+                    padding: 0;
+                    border-radius: 0;
+                    font-size: 0.875rem;
+                    line-height: 1.5;
+                    display: block;
+                    white-space: pre;
+                }
+                #aboutContent pre code.language-html { color: #e34c26; }
+                #aboutContent pre code.language-css { color: #1572b6; }
+                #aboutContent pre code.language-javascript,
+                #aboutContent pre code.language-js { color: #f7df1e; }
+                #aboutContent ul {
+                    margin: 0.75rem 0;
+                    padding-left: 1.5rem;
+                }
+                #aboutContent li {
+                    margin: 0.5rem 0;
+                    color: var(--text-primary);
+                }
+                #aboutContent hr {
+                    border: none;
+                    height: 2px;
+                    background: linear-gradient(90deg, var(--accent-color), transparent);
+                    margin: 2rem 0;
+                    border-radius: 1px;
+                }
+                #aboutContent a {
+                    color: var(--accent-color);
+                    text-decoration: none;
+                    border-bottom: 1px solid transparent;
+                    transition: border-bottom-color 0.3s ease;
+                }
+                #aboutContent a:hover {
+                    border-bottom-color: var(--accent-color);
+                }
+                #aboutContent strong {
+                    font-weight: 600;
+                    color: var(--text-primary);
+                }
+                #aboutContent em {
+                    font-style: italic;
+                    color: var(--text-secondary);
+                }
+                @media (max-width: 768px) {
+                    #aboutContent h1 { font-size: 1.75rem; }
+                    #aboutContent h2 { font-size: 1.25rem; }
+                    #aboutContent h3 { font-size: 1.125rem; }
+                    #aboutContent pre { padding: 1rem; }
+                    #aboutContent blockquote { padding: 0.75rem 1rem; }
+                }
+            `;
+            document.head.appendChild(style);
+        }
+
+        // Simplified About modal functions
+        function showAbout() {
+            injectAboutStyles();
+            
+            fetch('README.md')
+                .then(response => response.ok ? response.text() : Promise.reject())
+                .then(markdown => displayAboutContent(convertMarkdownToHTML(markdown)))
+                .catch(() => displayAboutContent('<h1>README内容加载中...</h1><p>本地开发环境下需要部署到服务器才能正常加载README文件</p>'));
+        }
+
+        function displayAboutContent(html) {
+            document.getElementById('aboutContent').innerHTML = html;
+            const modal = document.getElementById('aboutModal');
+            modal.style.opacity = '1';
+            modal.style.pointerEvents = 'auto';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function hideAbout() {
+            const modal = document.getElementById('aboutModal');
+            modal.style.opacity = '0';
+            modal.style.pointerEvents = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
         // 页面加载完成后初始化
         document.addEventListener('DOMContentLoaded', () => {
             new ElectronicMuyu();
@@ -906,6 +1562,14 @@
             if (e.code === 'Space') {
                 e.preventDefault();
                 document.getElementById('muyu').click();
+            }
+        });
+
+        // 点击About弹窗外部关闭
+        document.addEventListener('click', (e) => {
+            const modal = document.getElementById('aboutModal');
+            if (e.target === modal) {
+                hideAbout();
             }
         });
     </script>
