@@ -151,6 +151,18 @@
         }
 
         .muyu::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100px;
+            height: 100px;
+            background: url('./muyu.png') center/contain no-repeat;
+            filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.3));
+        }
+
+        .muyu::after {
             content: '🪵';
             position: absolute;
             top: 50%;
@@ -158,6 +170,15 @@
             transform: translate(-50%, -50%);
             font-size: 3rem;
             filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.3));
+            opacity: 0;
+        }
+
+        .muyu.fallback::before {
+            opacity: 0;
+        }
+
+        .muyu.fallback::after {
+            opacity: 1;
         }
 
         .muyu.clicked {
@@ -562,6 +583,7 @@
                 this.maxBubbles = 3;
                 
                 this.initializeAudio();
+                this.checkImageLoad();
                 this.updateDisplay();
                 this.updateAchievements();
                 this.bindEvents();
@@ -700,7 +722,7 @@
                         '一声木鱼，万事皆空', '敲响智慧', '洗涤心灵',
                         '禅心静虑', '慈悲为怀', '觉悟人生', '返璞归真'
                     ],
-                    critical: [                            // 之所以会出现2条，是因为这里原本就带着“+数字”
+                    critical: [                            // 之所以会出现2条，是因为这里原本就带着"数字"
                         '老板暴毙，功德爆棚', 'KPI清零，天降福报', '论文自动写完',
                         '教授突然不点名', '天劫化解，功德无量', '顿悟成佛，直接开摆',
                         '系统检测到暴击', '功德暴增！', '天降神迹！',
@@ -858,6 +880,19 @@
                 localStorage.setItem('merit', this.merit.toString());
                 localStorage.setItem('totalClicks', this.totalClicks.toString());
                 localStorage.setItem('maxCombo', this.maxCombo.toString());
+            }
+
+            checkImageLoad() {
+                // 检测木鱼图片是否加载成功
+                const testImg = new Image();
+                testImg.onload = () => {
+                    // 图片加载成功，使用PNG
+                };
+                testImg.onerror = () => {
+                    // 图片加载失败，使用emoji备用方案
+                    this.muyu.classList.add('fallback');
+                };
+                testImg.src = './muyu.png';
             }
         }
 
