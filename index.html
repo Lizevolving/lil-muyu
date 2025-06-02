@@ -20,19 +20,20 @@
             overflow-x: hidden;
             position: relative;
             user-select: none;
+            -webkit-user-select: none;
         }
 
         .background-pattern {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
             opacity: 0.05;
             background-image: 
                 radial-gradient(circle at 25% 25%, #D4AF37 0%, transparent 50%),
                 radial-gradient(circle at 75% 75%, #D4AF37 0%, transparent 50%);
-            background-size: 100px 100px;
+            background-size: 200px 200px;
             animation: float 20s ease-in-out infinite;
             z-index: 0;
         }
@@ -94,6 +95,7 @@
         .stat-item {
             background: rgba(212, 175, 55, 0.1);
             backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             border: 1px solid rgba(212, 175, 55, 0.3);
             padding: 1rem 1.5rem;
             border-radius: 15px;
@@ -130,8 +132,9 @@
                 0 20px 40px rgba(0, 0, 0, 0.3),
                 inset 0 0 20px rgba(139, 69, 19, 0.5),
                 0 0 0 3px rgba(212, 175, 55, 0.3);
-            transition: all 0.1s ease;
+            transition: all 0.15s ease;
             user-select: none;
+            -webkit-user-select: none;
             overflow: hidden;
         }
 
@@ -145,9 +148,6 @@
 
         .muyu:active {
             transform: scale(0.95);
-            box-shadow: 
-                0 10px 20px rgba(0, 0, 0, 0.2),
-                inset 0 0 15px rgba(139, 69, 19, 0.4);
         }
 
         .muyu::before {
@@ -160,33 +160,78 @@
             filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.3));
         }
 
+        .muyu.clicked {
+            animation: click-pulse 0.2s ease-out;
+        }
+
+        @keyframes click-pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
         .muyu.critical {
-            animation: critical-shake 0.5s ease-in-out;
+            animation: critical-effects 0.8s ease-in-out;
         }
 
-        @keyframes critical-shake {
-            0%, 100% { transform: scale(1) rotate(0deg); }
-            25% { transform: scale(1.1) rotate(-5deg); }
-            75% { transform: scale(1.1) rotate(5deg); }
-        }
-
-        .muyu.combo {
-            animation: combo-glow 0.5s ease-in-out;
-        }
-
-        @keyframes combo-glow {
-            0%, 100% { 
+        @keyframes critical-effects {
+            0% { 
+                transform: scale(1) rotate(0deg);
                 box-shadow: 
                     0 20px 40px rgba(0, 0, 0, 0.3),
                     inset 0 0 20px rgba(139, 69, 19, 0.5),
                     0 0 0 3px rgba(212, 175, 55, 0.3);
             }
-            50% { 
+            25% { 
+                transform: scale(1.15) rotate(-3deg);
                 box-shadow: 
-                    0 20px 60px rgba(212, 175, 55, 0.6),
+                    0 30px 60px rgba(212, 175, 55, 0.4),
                     inset 0 0 30px rgba(212, 175, 55, 0.3),
-                    0 0 0 10px rgba(212, 175, 55, 0.8),
-                    0 0 50px rgba(212, 175, 55, 0.4);
+                    0 0 0 8px rgba(212, 175, 55, 0.6);
+            }
+            75% { 
+                transform: scale(1.15) rotate(3deg);
+                box-shadow: 
+                    0 30px 60px rgba(212, 175, 55, 0.4),
+                    inset 0 0 30px rgba(212, 175, 55, 0.3),
+                    0 0 0 8px rgba(212, 175, 55, 0.6);
+            }
+            100% { 
+                transform: scale(1) rotate(0deg);
+                box-shadow: 
+                    0 20px 40px rgba(0, 0, 0, 0.3),
+                    inset 0 0 20px rgba(139, 69, 19, 0.5),
+                    0 0 0 3px rgba(212, 175, 55, 0.3);
+            }
+        }
+
+        .muyu.combo {
+            animation: combo-effects 1.2s ease-in-out;
+        }
+
+        @keyframes combo-effects {
+            0%, 100% { 
+                transform: scale(1);
+                box-shadow: 
+                    0 20px 40px rgba(0, 0, 0, 0.3),
+                    inset 0 0 20px rgba(139, 69, 19, 0.5),
+                    0 0 0 3px rgba(212, 175, 55, 0.3);
+            }
+            25%, 75% { 
+                transform: scale(1.2);
+                box-shadow: 
+                    0 30px 80px rgba(212, 175, 55, 0.8),
+                    inset 0 0 40px rgba(212, 175, 55, 0.4),
+                    0 0 0 15px rgba(212, 175, 55, 0.9),
+                    0 0 60px rgba(212, 175, 55, 0.6);
+            }
+            50% {
+                transform: scale(1.1);
+                box-shadow: 
+                    0 25px 60px rgba(212, 175, 55, 0.6),
+                    inset 0 0 30px rgba(212, 175, 55, 0.3),
+                    0 0 0 10px rgba(212, 175, 55, 0.7),
+                    0 0 40px rgba(212, 175, 55, 0.4);
             }
         }
 
@@ -202,6 +247,7 @@
             pointer-events: none;
             animation: bubble-rise 2s ease-out forwards;
             backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
             box-shadow: 0 5px 20px rgba(212, 175, 55, 0.3);
             z-index: 10;
         }
@@ -227,6 +273,7 @@
             right: 20px;
             background: rgba(212, 175, 55, 0.1);
             backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             border: 1px solid rgba(212, 175, 55, 0.3);
             padding: 1rem;
             border-radius: 15px;
@@ -234,6 +281,25 @@
             color: #D4AF37;
             max-width: 250px;
             z-index: 3;
+        }
+
+        .achievements-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .share-btn {
+            color: #D4AF37;
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+
+        .share-btn:hover {
+            color: #F4E67A;
+            transform: scale(1.1);
         }
 
         .achievement-item {
@@ -275,14 +341,16 @@
 
         .combo-counter {
             position: absolute;
-            top: -60px;
+            top: 100%;
             left: 50%;
             transform: translateX(-50%);
+            margin-top: 20px;
             color: #D4AF37;
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             font-weight: 700;
             opacity: 0;
             transition: opacity 0.3s ease;
+            text-align: center;
         }
 
         .combo-counter.show {
@@ -297,15 +365,63 @@
 
         footer {
             text-align: center;
-            padding: 2rem;
+            padding: 4rem 2rem 2rem;
             color: #B8860B;
             position: relative;
             z-index: 2;
+            margin-top: 4rem;
         }
 
         .version {
             font-size: 0.8rem;
             opacity: 0.6;
+        }
+
+        .share-popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(212, 175, 55, 0.95);
+            color: #1a1a1a;
+            padding: 2rem;
+            border-radius: 20px;
+            font-weight: 700;
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            z-index: 1000;
+            opacity: 0;
+            animation: popup-show 0.3s ease-out forwards;
+        }
+
+        @keyframes popup-show {
+            0% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(0.8);
+            }
+            100% {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1);
+            }
+        }
+
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            opacity: 0;
+            animation: overlay-show 0.3s ease-out forwards;
+        }
+
+        @keyframes overlay-show {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
         }
 
         @media (max-width: 768px) {
@@ -331,6 +447,21 @@
             .stat-item {
                 padding: 0.8rem 1rem;
                 min-width: 100px;
+            }
+
+            .combo-counter {
+                font-size: 1.1rem;
+                line-height: 1.2;
+            }
+
+            footer {
+                padding: 3rem 1rem 2rem;
+                margin-top: 3rem;
+            }
+
+            .share-popup {
+                max-width: 90%;
+                padding: 1.5rem;
             }
         }
 
@@ -384,16 +515,15 @@
         </div>
 
         <div class="muyu-container">
-            <div class="combo-counter" id="comboCounter">连击 x0</div>
             <div class="muyu" id="muyu"></div>
+            <div class="combo-counter" id="comboCounter">连击 x0</div>
         </div>
     </main>
 
     <div class="achievements">
-        <h3><i class="fas fa-trophy"></i> 成就</h3>
-        <div class="achievement-item">
-            <span>初心者</span>
-            <span id="achievement1">0/10</span>
+        <div class="achievements-header">
+            <h3><i class="fas fa-trophy"></i> 成就</h3>
+            <i class="fas fa-share-alt share-btn" id="shareBtn" title="分享功德"></i>
         </div>
         <div class="achievement-item">
             <span>修行者</span>
@@ -402,10 +532,6 @@
         <div class="achievement-item">
             <span>大师</span>
             <span id="achievement3">0/1000</span>
-        </div>
-        <div class="achievement-item">
-            <span>连击王</span>
-            <span id="achievement4">0/20</span>
         </div>
     </div>
 
@@ -430,6 +556,7 @@
                 this.maxComboDisplay = document.getElementById('maxCombo');
                 this.comboCounter = document.getElementById('comboCounter');
                 this.flashEffect = document.getElementById('flashEffect');
+                this.shareBtn = document.getElementById('shareBtn');
                 
                 this.textBubbles = [];
                 this.maxBubbles = 3;
@@ -474,6 +601,7 @@
 
             bindEvents() {
                 this.muyu.addEventListener('click', (e) => this.handleClick(e));
+                this.shareBtn.addEventListener('click', () => this.showSharePopup());
                 
                 // 防止右键菜单
                 this.muyu.addEventListener('contextmenu', (e) => e.preventDefault());
@@ -522,21 +650,25 @@
                 let meritGain = 1;
                 let message = this.getRandomMessage('normal');
                 
+                // 清除之前的动画类
+                this.muyu.classList.remove('clicked', 'critical', 'combo');
+                
                 if (isCombo) {
                     meritGain = this.currentCombo * 5;
                     message = this.getRandomMessage('combo');
                     this.playSound('combo');
-                    this.muyu.classList.add('combo');
+                    setTimeout(() => this.muyu.classList.add('combo'), 10);
                     this.createParticles(30);
                 } else if (isCritical) {
                     meritGain = Math.floor(Math.random() * 100) + 50;
                     message = this.getRandomMessage('critical');
                     this.playSound('critical');
-                    this.muyu.classList.add('critical');
+                    setTimeout(() => this.muyu.classList.add('critical'), 10);
                     this.flashEffect.classList.add('active');
                     this.createParticles(15);
                 } else {
                     this.playSound('normal');
+                    setTimeout(() => this.muyu.classList.add('clicked'), 10);
                     this.createParticles(5);
                 }
                 
@@ -545,7 +677,7 @@
                 this.totalClicks++;
                 
                 // 显示文字气泡
-                this.showTextBubble(message + ` +${meritGain}`, e);
+                this.showTextBubble(message, meritGain);
                 
                 // 更新显示
                 this.updateDisplay();
@@ -555,26 +687,33 @@
                 
                 // 移除动画类
                 setTimeout(() => {
-                    this.muyu.classList.remove('critical', 'combo');
+                    this.muyu.classList.remove('clicked', 'critical', 'combo');
                     this.flashEffect.classList.remove('active');
-                }, 500);
+                }, 1200);
             }
 
             getRandomMessage(type) {
                 const messages = {
                     normal: [
                         '南无阿弥陀佛', '功德+1', '心如止水', '佛光普照',
-                        '消除业障', '积德行善', '内心平静', '福慧双修'
+                        '消除业障', '积德行善', '内心平静', '福慧双修',
+                        '一声木鱼，万事皆空', '敲响智慧', '洗涤心灵',
+                        '禅心静虑', '慈悲为怀', '觉悟人生', '返璞归真'
                     ],
-                    critical: [
-                        '老板暴毙，功德+100', 'KPI清零，天降福报', '论文自动写完，功德+50',
-                        '教授突然不点名，功德+20', '天劫化解，功德+999', '顿悟成佛，直接开摆',
-                        '系统检测到暴击', '功德暴增！', '天降神迹！'
+                    critical: [                            // 之所以会出现2条，是因为这里原本就带着“+数字”
+                        '老板暴毙，功德爆棚', 'KPI清零，天降福报', '论文自动写完',
+                        '教授突然不点名', '天劫化解，功德无量', '顿悟成佛，直接开摆',
+                        '系统检测到暴击', '功德暴增！', '天降神迹！',
+                        '加班取消，今日摸鱼', '考试全会，学霸附体', '工资翻倍，财运亨通',
+                        'Bug自愈，代码完美', '作业消失，解脱束缚', '领导请假，自由万岁',
+                        '网速拉满，下载神速', '排队消失，绿灯常亮', '食堂加菜，免费续杯'
                     ],
                     combo: [
                         '功德无量，原地飞升', '系统检测到您已开悟', '连击成佛',
                         '梵音阵阵，功德连连', '佛法无边', '慧根深厚',
-                        '修为大进！', '道行日深！'
+                        '修为大进！', '道行日深！', '连击飞升，直达极乐',
+                        '禅定深入，智慧开启', '功德圆满，成就无上正觉',
+                        '打破轮回，超脱三界', '觉悟圆满，证得佛果'
                     ]
                 };
                 
@@ -582,7 +721,7 @@
                 return messageArray[Math.floor(Math.random() * messageArray.length)];
             }
 
-            showTextBubble(text, event) {
+            showTextBubble(message, meritGain) {
                 // 限制气泡数量
                 if (this.textBubbles.length >= this.maxBubbles) {
                     const oldBubble = this.textBubbles.shift();
@@ -593,7 +732,7 @@
                 
                 const bubble = document.createElement('div');
                 bubble.className = 'text-bubble';
-                bubble.textContent = text;
+                bubble.textContent = `${message} +${meritGain}`;
                 
                 // 随机位置
                 const rect = this.muyu.getBoundingClientRect();
@@ -659,10 +798,6 @@
             }
 
             updateAchievements() {
-                // 初心者: 敲击10次
-                const achievement1 = Math.min(this.totalClicks, 10);
-                document.getElementById('achievement1').textContent = `${achievement1}/10`;
-                
                 // 修行者: 敲击100次
                 const achievement2 = Math.min(this.totalClicks, 100);
                 document.getElementById('achievement2').textContent = `${achievement2}/100`;
@@ -671,14 +806,52 @@
                 const achievement3 = Math.min(this.totalClicks, 1000);
                 document.getElementById('achievement3').textContent = `${achievement3}/1000`;
                 
-                // 连击王: 20连击
-                const achievement4 = Math.min(this.maxCombo, 20);
-                document.getElementById('achievement4').textContent = `${achievement4}/20`;
-                
                 // 佛光普照效果 (100次敲击后解锁)
                 if (this.totalClicks >= 100) {
                     document.body.style.background = 'linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 50%, #3a2d1a 100%)';
                 }
+            }
+
+            showSharePopup() {
+                // 创建遮罩层
+                const overlay = document.createElement('div');
+                overlay.className = 'popup-overlay';
+                
+                // 创建弹窗
+                const popup = document.createElement('div');
+                popup.className = 'share-popup';
+                popup.innerHTML = `
+                    <i class="fas fa-clipboard-check" style="font-size: 2rem; margin-bottom: 1rem; color: #1a1a1a;"></i>
+                    <h3>功德分享成功！</h3>
+                    <p style="margin: 1rem 0; opacity: 0.8;">网页链接已复制到剪贴板</p>
+                    <p style="font-size: 0.9rem; opacity: 0.6;">总功德: ${this.merit.toLocaleString()}</p>
+                `;
+                
+                document.body.appendChild(overlay);
+                document.body.appendChild(popup);
+                
+                // 模拟复制到剪贴板
+                const shareUrl = 'https://lil-muyu.example.com/';
+                if (navigator.clipboard) {
+                    navigator.clipboard.writeText(shareUrl).catch(() => {
+                        // 降级处理
+                        console.log('链接:', shareUrl);
+                    });
+                } else {
+                    console.log('链接:', shareUrl);
+                }
+                
+                // 3秒后自动关闭
+                setTimeout(() => {
+                    if (overlay.parentNode) overlay.parentNode.removeChild(overlay);
+                    if (popup.parentNode) popup.parentNode.removeChild(popup);
+                }, 3000);
+                
+                // 点击遮罩层关闭
+                overlay.addEventListener('click', () => {
+                    if (overlay.parentNode) overlay.parentNode.removeChild(overlay);
+                    if (popup.parentNode) popup.parentNode.removeChild(popup);
+                });
             }
 
             saveData() {
