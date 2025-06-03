@@ -477,75 +477,94 @@
 
         .progress-container {
             position: relative;
-            height: 60px;
+            height: 100px;
+            margin: 30px 0;
+            padding: 0 10px;
         }
 
         .progress-bar {
-            height: 8px;
+            height: 10px;
             background: rgba(212, 175, 55, 0.2);
-            border-radius: 4px;
+            border-radius: 5px;
             overflow: hidden;
-            position: relative;
-            margin: 30px 0 20px 0;
+            position: absolute;
+            top: 50%;
+            left: 10px;
+            right: 10px;
+            transform: translateY(-50%);
         }
 
         .progress-fill {
             height: 100%;
             background: linear-gradient(90deg, #D4AF37, #F4E67A);
-            border-radius: 4px;
+            border-radius: 5px;
             transition: width 0.8s ease;
             width: 0%;
         }
 
         .progress-fill.completed {
             background: linear-gradient(90deg, #F4E67A, #FFD700);
-            box-shadow: 0 0 12px rgba(255, 215, 0, 0.5);
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
         }
 
         .achievement-nodes {
             position: absolute;
-            top: 26px;
-            width: 100%;
-            height: 16px;
+            top: 50%;
+            left: 10px;
+            right: 10px;
+            height: 18px;
             pointer-events: none;
+            transform: translateY(-50%);
         }
 
         .achievement-node {
             position: absolute;
-            width: 16px;
-            height: 16px;
+            width: 18px;
+            height: 18px;
             background: rgba(212, 175, 55, 0.4);
             border: 3px solid #1a1a1a;
             border-radius: 50%;
             transform: translateX(-50%);
             transition: all 0.3s ease;
+            z-index: 5;
         }
 
         .achievement-node.completed {
             background: #F4E67A;
             border-color: #FFD700;
-            box-shadow: 0 0 12px rgba(244, 230, 122, 0.7);
+            box-shadow: 0 0 15px rgba(244, 230, 122, 0.8);
         }
 
         .achievement-labels {
             position: absolute;
-            top: 48px;
-            width: 100%;
+            left: 10px;
+            right: 10px;
+            height: 100%;
         }
 
         .achievement-label {
             position: absolute;
             transform: translateX(-50%);
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             font-weight: 500;
             color: #D4AF37;
             white-space: nowrap;
             text-align: center;
+            line-height: 1.2;
+        }
+
+        .achievement-label.top {
+            top: 15px;
+        }
+
+        .achievement-label.bottom {
+            bottom: 15px;
         }
 
         .achievement-label.completed {
             color: #F4E67A;
             font-weight: 600;
+            text-shadow: 0 0 8px rgba(244, 230, 122, 0.5);
         }
 
         .particles {
@@ -612,9 +631,170 @@
             margin-top: 4rem;
         }
 
+        footer p:first-child {
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: visible;
+        }
+
+        footer p:first-child:hover {
+            color: #D4AF37;
+            text-shadow: 0 0 20px rgba(212, 175, 55, 0.6);
+        }
+
+        footer p:first-child:active {
+            color: #F4E67A;
+            text-shadow: 
+                0 0 10px rgba(244, 230, 122, 0.8),
+                0 0 20px rgba(244, 230, 122, 0.6),
+                0 0 30px rgba(244, 230, 122, 0.4);
+            animation: footer-pulse 0.6s ease-out;
+        }
+
+        footer p:first-child::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(244, 230, 122, 0.6) 0%, rgba(244, 230, 122, 0.3) 30%, transparent 70%);
+            transform: translate(-50%, -50%);
+            opacity: 0;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        footer p:first-child:active::after {
+            animation: ripple-wave 1s ease-out;
+        }
+
+        @keyframes footer-pulse {
+            0% { 
+                text-shadow: 
+                    0 0 10px rgba(244, 230, 122, 0.8),
+                    0 0 20px rgba(244, 230, 122, 0.6),
+                    0 0 30px rgba(244, 230, 122, 0.4);
+            }
+            50% { 
+                text-shadow: 
+                    0 0 20px rgba(244, 230, 122, 1),
+                    0 0 30px rgba(244, 230, 122, 0.8),
+                    0 0 40px rgba(244, 230, 122, 0.6),
+                    0 0 50px rgba(244, 230, 122, 0.4);
+            }
+            100% { 
+                text-shadow: 
+                    0 0 10px rgba(244, 230, 122, 0.8),
+                    0 0 20px rgba(244, 230, 122, 0.6),
+                    0 0 30px rgba(244, 230, 122, 0.4);
+            }
+        }
+
+        @keyframes ripple-wave {
+            0% {
+                width: 0;
+                height: 0;
+                opacity: 0.8;
+            }
+            50% {
+                width: 200px;
+                height: 200px;
+                opacity: 0.4;
+            }
+            100% {
+                width: 400px;
+                height: 400px;
+                opacity: 0;
+            }
+        }
+
         .version {
             font-size: 0.8rem;
             opacity: 0.6;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            text-align: center;
+            position: relative;
+            overflow: visible;
+        }
+
+        .version:hover {
+            opacity: 0.8;
+            color: #D4AF37;
+            text-shadow: 0 0 15px rgba(212, 175, 55, 0.5);
+        }
+
+        .version:active {
+            opacity: 1;
+            color: #F4E67A;
+            text-shadow: 
+                0 0 8px rgba(244, 230, 122, 0.9),
+                0 0 15px rgba(244, 230, 122, 0.7),
+                0 0 25px rgba(244, 230, 122, 0.5);
+            animation: version-glow 0.8s ease-out;
+        }
+
+        .version::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(244, 230, 122, 0.5) 0%, rgba(244, 230, 122, 0.2) 40%, transparent 80%);
+            transform: translate(-50%, -50%);
+            opacity: 0;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .version:active::after {
+            animation: ripple-wave-small 1s ease-out;
+        }
+
+        @keyframes version-glow {
+            0% { 
+                text-shadow: 
+                    0 0 8px rgba(244, 230, 122, 0.9),
+                    0 0 15px rgba(244, 230, 122, 0.7),
+                    0 0 25px rgba(244, 230, 122, 0.5);
+            }
+            50% { 
+                text-shadow: 
+                    0 0 15px rgba(244, 230, 122, 1),
+                    0 0 25px rgba(244, 230, 122, 0.9),
+                    0 0 35px rgba(244, 230, 122, 0.7),
+                    0 0 45px rgba(244, 230, 122, 0.5);
+            }
+            100% { 
+                text-shadow: 
+                    0 0 8px rgba(244, 230, 122, 0.9),
+                    0 0 15px rgba(244, 230, 122, 0.7),
+                    0 0 25px rgba(244, 230, 122, 0.5);
+            }
+        }
+
+        @keyframes ripple-wave-small {
+            0% {
+                width: 0;
+                height: 0;
+                opacity: 0.6;
+            }
+            50% {
+                width: 150px;
+                height: 150px;
+                opacity: 0.3;
+            }
+            100% {
+                width: 300px;
+                height: 300px;
+                opacity: 0;
+            }
         }
 
         .share-popup {
@@ -813,6 +993,22 @@
             transform: scale(1.1);
         }
 
+        .wechat-btn {
+            background: none;
+            border: none;
+            color: #D4AF37;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0;
+            line-height: 1;
+            transition: all 0.3s ease;
+        }
+
+        .wechat-btn:hover {
+            color: #F4E67A;
+            transform: scale(1.1);
+        }
+
         .about-close {
             background: none;
             border: none;
@@ -890,14 +1086,17 @@
                 <div class="progress-fill"></div>
             </div>
             <div class="achievement-nodes">
-                <div class="achievement-node" data-achievement="0" style="left: 33.33%;"></div>
-                <div class="achievement-node" data-achievement="1" style="left: 66.66%;"></div>
+                <div class="achievement-node" data-achievement="0" style="left: 10%;"></div>
+                <div class="achievement-node" data-achievement="1" style="left: 33.33%;"></div>
                 <div class="achievement-node" data-achievement="2" style="left: 100%;"></div>
             </div>
             <div class="achievement-labels">
-                <div class="achievement-label" data-label="0" style="left: 33.33%;">修行者<br>100</div>
-                <div class="achievement-label" data-label="1" style="left: 66.66%;">大师<br>1000</div>
-                <div class="achievement-label" data-label="2" style="left: 100%;">圣者<br>3000</div>
+                <div class="achievement-label top" data-label="0" style="left: 10%;">修行者</div>
+                <div class="achievement-label top" data-label="1" style="left: 33.33%;">大师</div>
+                <div class="achievement-label top" data-label="2" style="left: 100%;">圣者</div>
+                <div class="achievement-label bottom" data-label="0" style="left: 10%;">100</div>
+                <div class="achievement-label bottom" data-label="1" style="left: 33.33%;">1000</div>
+                <div class="achievement-label bottom" data-label="2" style="left: 100%;">3000</div>
             </div>
         </div>
     </div>
@@ -914,6 +1113,9 @@
                 <a href="https://github.com/Lizevolving/lil-muyu" target="_blank" class="github-btn" title="查看源码" rel="noopener">
                     <i class="fab fa-github"></i>
                 </a>
+                <button class="wechat-btn" title="联系作者" onclick="showWechatPopup()">
+                    <i class="fab fa-weixin"></i>
+                </button>
                 <button class="about-close" onclick="hideAbout()">✕</button>
             </div>
             <div class="about-body" id="aboutContent">
@@ -1343,22 +1545,22 @@
 
             updateAchievements() {
                 const achievements = [
-                    { name: '修行者', target: 100, position: 33.33 },
-                    { name: '大师', target: 1000, position: 66.66 },
+                    { name: '修行者', target: 100, position: 10 },
+                    { name: '大师', target: 1000, position: 33.33 },
                     { name: '圣者', target: 3000, position: 100 }
                 ];
                 
-                // 修复进度条显示逻辑
+                // 修复进度条显示逻辑 - 按视觉效果优化的比例计算
                 let overallProgress = 0;
                 if (this.totalClicks <= 100) {
-                    // 0-100: 0% - 33.33%
-                    overallProgress = (this.totalClicks / 100) * 33.33;
+                    // 0-100: 0% - 10%
+                    overallProgress = (this.totalClicks / 100) * 10;
                 } else if (this.totalClicks <= 1000) {
-                    // 100-1000: 33.33% - 66.66%
-                    overallProgress = 33.33 + ((this.totalClicks - 100) / 900) * 33.33;
+                    // 100-1000: 10% - 33.33%
+                    overallProgress = 10 + ((this.totalClicks - 100) / 900) * 23.33;
                 } else if (this.totalClicks <= 3000) {
-                    // 1000-3000: 66.66% - 100%
-                    overallProgress = 66.66 + ((this.totalClicks - 1000) / 2000) * 33.34;
+                    // 1000-3000: 33.33% - 100%
+                    overallProgress = 33.33 + ((this.totalClicks - 1000) / 2000) * 66.67;
                 } else {
                     overallProgress = 100;
                 }
@@ -1372,15 +1574,20 @@
                 }
                 
                 achievements.forEach((achievement, index) => {
-                    const node = document.querySelector(`[data-achievement="${index}"]`);
-                    const label = document.querySelector(`[data-label="${index}"]`);
+                    const nodes = document.querySelectorAll(`[data-achievement="${index}"]`);
+                    const labels = document.querySelectorAll(`[data-label="${index}"]`);
                     
-                    if (node && this.totalClicks >= achievement.target) {
-                        node.classList.add('completed');
-                    }
-                    if (label && this.totalClicks >= achievement.target) {
-                        label.classList.add('completed');
-                    }
+                    nodes.forEach(node => {
+                        if (this.totalClicks >= achievement.target) {
+                            node.classList.add('completed');
+                        }
+                    });
+                    
+                    labels.forEach(label => {
+                        if (this.totalClicks >= achievement.target) {
+                            label.classList.add('completed');
+                        }
+                    });
                 });
                 
                 // 佛光普照效果
@@ -1760,6 +1967,53 @@
                 hideAbout();
             }
         });
+
+        // WeChat contact popup function
+        function showWechatPopup() {
+            // 检查About modal是否打开，如果是则先关闭它
+            const aboutModal = document.getElementById('aboutModal');
+            const isAboutOpen = aboutModal.style.opacity === '1' || aboutModal.style.pointerEvents === 'auto';
+            
+            if (isAboutOpen) {
+                // 先关闭About modal
+                hideAbout();
+                // 等待About modal渐隐完成后再显示微信弹窗
+                setTimeout(showWechatModal, 300);
+            } else {
+                // 直接显示微信弹窗
+                showWechatModal();
+            }
+            
+            function showWechatModal() {
+                // 创建遮罩层
+                const overlay = document.createElement('div');
+                overlay.className = 'popup-overlay';
+                
+                // 创建弹窗
+                const popup = document.createElement('div');
+                popup.className = 'share-popup';
+                popup.innerHTML = `
+                    <h3> 😎向作者吐槽？</h3>
+                    <p style="margin: 1rem 0; opacity: 0.8;">微信号：liz041218</p>
+                `;
+                
+                document.body.appendChild(overlay);
+                document.body.appendChild(popup);
+                
+                // 定义关闭函数
+                const closePopup = () => {
+                    overlay.classList.add('fade-out');
+                    popup.classList.add('fade-out');
+                    setTimeout(() => {
+                        if (overlay.parentNode) overlay.parentNode.removeChild(overlay);
+                        if (popup.parentNode) popup.parentNode.removeChild(popup);
+                    }, 500);
+                };
+                
+                // 点击遮罩层立即关闭
+                overlay.addEventListener('click', closePopup);
+            }
+        }
     </script>
 </body>
 </html> 
