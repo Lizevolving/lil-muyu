@@ -87,12 +87,14 @@
             transition: opacity 0.5s ease;
             text-shadow: 0 0 20px rgba(212, 175, 55, 0.6);
             cursor: pointer;
-            z-index: 10;
+            z-index: 100;
             white-space: nowrap;
+            pointer-events: none;
         }
 
         .easter-egg-message.show {
             opacity: 1;
+            pointer-events: auto;
         }
 
         main {
@@ -300,43 +302,51 @@
                     inset 0 0 20px rgba(139, 69, 19, 0.5),
                     0 0 0 3px rgba(212, 175, 55, 0.3);
             }
-            10% {
-                transform: scale(1.02);
+            15% {
+                transform: scale(1.02) rotateZ(2deg);
                 box-shadow: 
                     0 20px 40px rgba(0, 0, 0, 0.3),
                     inset 0 0 20px rgba(139, 69, 19, 0.5),
                     0 0 0 3px rgba(212, 175, 55, 0.3),
-                    inset 0 -100px 0 rgba(255, 255, 255, 0.9);
+                    inset 0 0 0 4px rgba(255, 255, 255, 1),
+                    inset 0 -100px 0 rgba(255, 0, 0, 0.8),
+                    inset 100px 0 0 rgba(255, 0, 0, 0.6),
+                    inset -100px 0 0 rgba(255, 0, 0, 0.6);
             }
-            20% {
-                transform: scale(1.05);
+            30% {
+                transform: scale(1.08) rotateZ(-3deg) scaleX(1.1);
                 box-shadow: 
-                    0 22px 45px rgba(0, 0, 0, 0.35),
-                    inset 0 0 22px rgba(139, 69, 19, 0.55),
-                    0 0 0 4px rgba(212, 175, 55, 0.4),
-                    inset 0 -100px 0 rgba(255, 255, 255, 0.9),
-                    inset 0 -80px 0 rgba(0, 0, 0, 0.3),
-                    inset 0 80px 0 rgba(0, 0, 0, 0.3);
+                    0 25px 50px rgba(255, 0, 0, 0.4),
+                    inset 0 0 25px rgba(255, 69, 19, 0.6),
+                    0 0 0 5px rgba(255, 175, 55, 0.8),
+                    inset 0 0 0 6px rgba(255, 255, 255, 1),
+                    inset 0 -120px 0 rgba(255, 0, 0, 1),
+                    inset 120px 0 0 rgba(255, 0, 0, 0.8),
+                    inset -120px 0 0 rgba(255, 0, 0, 0.8),
+                    0 0 30px rgba(255, 0, 0, 0.6);
             }
-            40% {
-                transform: scale(1.08) scaleY(0.95);
+            50% {
+                transform: scale(1.12) rotateZ(5deg) scaleX(1.15) scaleY(0.9);
                 box-shadow: 
-                    0 25px 50px rgba(0, 0, 0, 0.4),
-                    inset 0 0 25px rgba(139, 69, 19, 0.6),
-                    0 0 0 5px rgba(212, 175, 55, 0.5),
-                    inset 0 -100px 0 rgba(255, 255, 255, 1),
-                    inset 0 -60px 0 rgba(0, 0, 0, 0.5),
-                    inset 0 60px 0 rgba(0, 0, 0, 0.5);
+                    0 30px 60px rgba(255, 0, 0, 0.6),
+                    inset 0 0 30px rgba(255, 100, 50, 0.8),
+                    0 0 0 8px rgba(255, 200, 100, 1),
+                    inset 0 0 0 8px rgba(255, 255, 255, 1),
+                    inset 0 -150px 0 rgba(255, 0, 0, 1),
+                    inset 150px 0 0 rgba(255, 50, 0, 1),
+                    inset -150px 0 0 rgba(255, 50, 0, 1),
+                    0 0 50px rgba(255, 0, 0, 0.8);
             }
-            70% {
-                transform: scale(1.03) scaleY(0.98);
+            75% {
+                transform: scale(1.05) rotateZ(-1deg) scaleX(1.05) scaleY(0.95);
                 box-shadow: 
-                    0 22px 45px rgba(0, 0, 0, 0.35),
-                    inset 0 0 22px rgba(139, 69, 19, 0.55),
-                    0 0 0 4px rgba(212, 175, 55, 0.4),
-                    inset 0 -100px 0 rgba(255, 255, 255, 0.6),
-                    inset 0 -30px 0 rgba(0, 0, 0, 0.2),
-                    inset 0 30px 0 rgba(0, 0, 0, 0.2);
+                    0 22px 45px rgba(255, 0, 0, 0.3),
+                    inset 0 0 22px rgba(200, 69, 19, 0.6),
+                    0 0 0 4px rgba(212, 175, 55, 0.6),
+                    inset 0 0 0 3px rgba(255, 255, 255, 0.8),
+                    inset 0 -80px 0 rgba(255, 0, 0, 0.6),
+                    inset 80px 0 0 rgba(255, 0, 0, 0.4),
+                    inset -80px 0 0 rgba(255, 0, 0, 0.4);
             }
             100% { 
                 transform: scale(1);
@@ -432,11 +442,11 @@
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             border: 1px solid rgba(212, 175, 55, 0.3);
-            padding: 1rem;
+            padding: 1.5rem;
             border-radius: 15px;
             font-size: 0.9rem;
             color: #D4AF37;
-            max-width: 250px;
+            min-width: 280px;
             z-index: 3;
         }
 
@@ -444,7 +454,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
         }
 
         .share-btn {
@@ -459,10 +469,77 @@
             transform: scale(1.1);
         }
 
-        .achievement-item {
-            margin: 0.5rem 0;
-            display: flex;
-            justify-content: space-between;
+        .progress-container {
+            position: relative;
+            height: 60px;
+        }
+
+        .progress-bar {
+            height: 8px;
+            background: rgba(212, 175, 55, 0.2);
+            border-radius: 4px;
+            overflow: hidden;
+            position: relative;
+            margin: 30px 0 20px 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #D4AF37, #F4E67A);
+            border-radius: 4px;
+            transition: width 0.8s ease;
+            width: 0%;
+        }
+
+        .progress-fill.completed {
+            background: linear-gradient(90deg, #F4E67A, #FFD700);
+            box-shadow: 0 0 12px rgba(255, 215, 0, 0.5);
+        }
+
+        .achievement-nodes {
+            position: absolute;
+            top: 26px;
+            width: 100%;
+            height: 16px;
+            pointer-events: none;
+        }
+
+        .achievement-node {
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            background: rgba(212, 175, 55, 0.4);
+            border: 3px solid #1a1a1a;
+            border-radius: 50%;
+            transform: translateX(-50%);
+            transition: all 0.3s ease;
+        }
+
+        .achievement-node.completed {
+            background: #F4E67A;
+            border-color: #FFD700;
+            box-shadow: 0 0 12px rgba(244, 230, 122, 0.7);
+        }
+
+        .achievement-labels {
+            position: absolute;
+            top: 48px;
+            width: 100%;
+        }
+
+        .achievement-label {
+            position: absolute;
+            transform: translateX(-50%);
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: #D4AF37;
+            white-space: nowrap;
+            text-align: center;
+        }
+
+        .achievement-label.completed {
+            color: #F4E67A;
+            font-weight: 600;
         }
 
         .particles {
@@ -709,19 +786,32 @@
 
         .about-header {
             position: relative;
-            padding: 1rem 2rem 2rem 2rem;
+            padding: 0.3rem 1.5rem;
             border-bottom: 1px solid rgba(212, 175, 55, 0.2);
             background: linear-gradient(90deg, rgba(212, 175, 55, 0.1), transparent);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .github-btn {
+            color: #D4AF37;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .github-btn:hover {
+            color: #F4E67A;
+            transform: scale(1.1);
         }
 
         .about-close {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
             background: none;
             border: none;
             color: #D4AF37;
-            font-size: 2rem;
+            font-size: 1.5rem;
             cursor: pointer;
             padding: 0;
             line-height: 1;
@@ -736,7 +826,7 @@
         .about-body {
             padding: 2rem;
             overflow-y: auto;
-            max-height: calc(80vh - 80px);
+            max-height: calc(80vh - 45px);
             color: #E0E0E0;
             line-height: 1.6;
         }
@@ -786,16 +876,23 @@
 
     <div class="achievements">
         <div class="achievements-header">
-            <h3><i class="fas fa-trophy"></i> 成就</h3>
+            <h3><i class="fas fa-trophy"></i> 成就 </h3>
             <i class="fas fa-share-alt share-btn" id="shareBtn" title="分享功德"></i>
         </div>
-        <div class="achievement-item">
-            <span>修行者</span>
-            <span id="achievement2">0/100</span>
-        </div>
-        <div class="achievement-item">
-            <span>大师</span>
-            <span id="achievement3">0/1000</span>
+        <div class="progress-container">
+            <div class="progress-bar">
+                <div class="progress-fill"></div>
+            </div>
+            <div class="achievement-nodes">
+                <div class="achievement-node" data-achievement="0" style="left: 33.33%;"></div>
+                <div class="achievement-node" data-achievement="1" style="left: 66.66%;"></div>
+                <div class="achievement-node" data-achievement="2" style="left: 100%;"></div>
+            </div>
+            <div class="achievement-labels">
+                <div class="achievement-label" data-label="0" style="left: 33.33%;">修行者<br>100</div>
+                <div class="achievement-label" data-label="1" style="left: 66.66%;">大师<br>1000</div>
+                <div class="achievement-label" data-label="2" style="left: 100%;">圣者<br>3000</div>
+            </div>
         </div>
     </div>
 
@@ -805,13 +902,16 @@
     </footer>
 
     <!-- About Modal -->
-    <div id="aboutModal" class="about-modal">
+    <div class="about-modal" id="aboutModal">
         <div class="about-content">
             <div class="about-header">
-                <button class="about-close" onclick="hideAbout()">×</button>
+                <a href="https://github.com/Lizevolving/lil-muyu" target="_blank" class="github-btn" title="查看源码" rel="noopener">
+                    <i class="fab fa-github"></i>
+                </a>
+                <button class="about-close" onclick="hideAbout()">✕</button>
             </div>
-            <div id="aboutContent" class="about-body">
-                <!-- Content will be loaded here -->
+            <div class="about-body" id="aboutContent">
+                <!-- 内容将通过JavaScript动态加载 -->
             </div>
         </div>
     </div>
@@ -825,15 +925,11 @@
                 this.currentCombo = 0;
                 this.lastClickTime = 0;
                 this.comboTimeout = null;
-                
-                // 空闲和爆发型动画控制
                 this.idleTimeout = null;
                 this.lastBlastTime = 0;
-                this.blastCooldown = 8000; // 8秒冷却
-                
-                // LOGO彩蛋检测
-                this.logoClicks = [];
+                this.blastCooldown = 8000;
                 this.easterEggActive = false;
+                this.easterEggTimeout = null;
                 
                 this.muyu = document.getElementById('muyu');
                 this.meritDisplay = document.getElementById('merit');
@@ -847,6 +943,10 @@
                 
                 this.textBubbles = [];
                 this.maxBubbles = 3;
+                this.audioContext = null;
+                this.sounds = {};
+                this.isPlayingSound = false;
+                this.soundTypeCounter = { normal: 0, critical: 0, combo: 0, chanting: 0 };
                 
                 this.initializeAudio();
                 this.checkImageLoad();
@@ -857,108 +957,13 @@
             }
 
             initializeAudio() {
-                // 创建音频上下文
                 this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
-                
-                // 扩展音效频率
                 this.sounds = {
                     normal: { frequency: 200, duration: 0.3 },
                     critical: { frequency: 100, duration: 0.5 },
                     combo: { frequency: 400, duration: 0.7 },
                     chanting: { baseFrequency: 110, duration: 1.2 }
                 };
-            }
-
-            playSound(type = 'normal') {
-                if (!this.audioContext) return;
-                
-                if (type === 'chanting') {
-                    this.playChantingSound();
-                    return;
-                }
-                
-                const sound = this.sounds[type];
-                const oscillator = this.audioContext.createOscillator();
-                const gainNode = this.audioContext.createGain();
-                
-                oscillator.connect(gainNode);
-                gainNode.connect(this.audioContext.destination);
-                
-                oscillator.frequency.setValueAtTime(sound.frequency, this.audioContext.currentTime);
-                oscillator.type = 'sine';
-                
-                gainNode.gain.setValueAtTime(0.3, this.audioContext.currentTime);
-                gainNode.gain.exponentialRampToValueAtTime(0.01, this.audioContext.currentTime + sound.duration);
-                
-                oscillator.start(this.audioContext.currentTime);
-                oscillator.stop(this.audioContext.currentTime + sound.duration);
-            }
-
-            playChantingSound() {
-                if (!this.audioContext) return;
-                
-                const sound = this.sounds.chanting;
-                const startTime = this.audioContext.currentTime;
-                
-                // 主音：深沉钟声般的低频
-                const baseOscillator = this.audioContext.createOscillator();
-                const baseGain = this.audioContext.createGain();
-                
-                baseOscillator.connect(baseGain);
-                baseGain.connect(this.audioContext.destination);
-                
-                baseOscillator.frequency.setValueAtTime(sound.baseFrequency, startTime);
-                baseOscillator.type = 'triangle'; // 三角波更温和
-                
-                // 泛音1：增加丰富度
-                const harmonic1 = this.audioContext.createOscillator();
-                const harmonic1Gain = this.audioContext.createGain();
-                
-                harmonic1.connect(harmonic1Gain);
-                harmonic1Gain.connect(this.audioContext.destination);
-                
-                harmonic1.frequency.setValueAtTime(sound.baseFrequency * 1.5, startTime);
-                harmonic1.type = 'sine';
-                
-                // 低频震动：模拟胸腔共鸣
-                const subBass = this.audioContext.createOscillator();
-                const subGain = this.audioContext.createGain();
-                
-                subBass.connect(subGain);
-                subGain.connect(this.audioContext.destination);
-                
-                subBass.frequency.setValueAtTime(sound.baseFrequency * 0.5, startTime);
-                subBass.type = 'sine';
-                
-                // 包络设计：模拟钟声余韵
-                baseGain.gain.setValueAtTime(0, startTime);
-                baseGain.gain.linearRampToValueAtTime(0.1, startTime + 0.1);
-                baseGain.gain.setValueAtTime(0.1, startTime + 0.2);
-                baseGain.gain.exponentialRampToValueAtTime(0.001, startTime + sound.duration);
-                
-                harmonic1Gain.gain.setValueAtTime(0, startTime);
-                harmonic1Gain.gain.linearRampToValueAtTime(0.05, startTime + 0.15);
-                harmonic1Gain.gain.exponentialRampToValueAtTime(0.001, startTime + sound.duration * 0.8);
-                
-                subGain.gain.setValueAtTime(0, startTime);
-                subGain.gain.linearRampToValueAtTime(0.03, startTime + 0.05);
-                subGain.gain.exponentialRampToValueAtTime(0.001, startTime + sound.duration * 0.6);
-                
-                // 启动音频
-                baseOscillator.start(startTime);
-                harmonic1.start(startTime);
-                subBass.start(startTime);
-                
-                // 设置停止时间
-                setTimeout(() => {
-                    try {
-                        baseOscillator.stop();
-                        harmonic1.stop();
-                        subBass.stop();
-                    } catch (e) {
-                        // 忽略已停止的错误
-                    }
-                }, sound.duration * 1000);
             }
 
             startIdleTimer() {
@@ -999,9 +1004,17 @@
                 this.muyu.addEventListener('click', (e) => this.handleClick(e));
                 this.shareBtn.addEventListener('click', () => this.showSharePopup());
                 
-                // LOGO彩蛋检测
-                this.logoTitle.addEventListener('click', (e) => this.handleLogoClick(e));
-                this.easterEggMessage.addEventListener('click', () => this.showAbout());
+                // LOGO彩蛋：单次点击响应          // 代码闹鬼？？
+                this.logoTitle.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    this.showEasterEgg();
+                });
+                
+                // 彩蛋文字：点击进入About
+                this.easterEggMessage.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    this.showAbout();
+                });
                 
                 // 防止右键菜单
                 this.muyu.addEventListener('contextmenu', (e) => e.preventDefault());
@@ -1018,33 +1031,44 @@
                 });
             }
 
-            handleLogoClick(e) {
-                const now = Date.now();
-                this.logoClicks.push(now);
+            showEasterEgg() {
+                if (this.easterEggActive) return;
                 
-                // 保留5秒内的点击记录
-                this.logoClicks = this.logoClicks.filter(time => now - time <= 5000);
-                
-                // 严格检测：5秒内至少点击2次且当前未激活
-                if (this.logoClicks.length >= 2 && !this.easterEggActive) {
-                    this.triggerEasterEgg();
-                }
-            }
-
-            triggerEasterEgg() {
                 this.easterEggActive = true;
+                console.log('Easter egg activated'); // 调试日志
                 
                 // LOGO渐隐
-                this.logoTitle.style.transition = 'opacity 0.5s ease';
+                this.logoTitle.style.transition = 'opacity 0.3s ease';
                 this.logoTitle.style.opacity = '0';
                 
-                // 彩蛋消息渐显
+                // 彩蛋消息渐显 - 确保显示
                 setTimeout(() => {
                     this.easterEggMessage.classList.add('show');
-                }, 300);
+                    console.log('Easter egg message shown'); // 调试日志
+                }, 200);
                 
-                // 360度金色粒子射出
+                // 粒子效果
                 this.createEasterEggParticles();
+                
+                // 5秒后自动恢复
+                this.easterEggTimeout = setTimeout(() => {
+                    this.hideEasterEgg();
+                }, 5000);
+            }
+
+            hideEasterEgg() {
+                if (!this.easterEggActive) return;
+                
+                this.easterEggActive = false;
+                clearTimeout(this.easterEggTimeout);
+                
+                // 彩蛋消息渐隐
+                this.easterEggMessage.classList.remove('show');
+                
+                // LOGO渐显
+                setTimeout(() => {
+                    this.logoTitle.style.opacity = '1';
+                }, 200);
             }
 
             createEasterEggParticles() {
@@ -1127,12 +1151,13 @@
                     this.maxCombo = this.currentCombo;
                 }
                 
-                // 判断类型和奖励
-                let isCritical = Math.random() < 0.08; // 8% 暴击率
+                // 判断类型和奖励 - 重构音效系统
+                let isCritical = Math.random() < 0.1; // 10% 暴击率
                 let isCombo = this.currentCombo >= 5;
                 
                 let meritGain = 1;
                 let message = this.getRandomMessage('normal');
+                let soundType = this.determineSoundType(isCombo, isCritical);
                 
                 // 检查爆发型动画
                 let blastType = null;
@@ -1143,7 +1168,6 @@
                 if (isCombo) {
                     meritGain = this.currentCombo * 5;
                     message = this.getRandomMessage('combo');
-                    this.playSound('chanting');
                     
                     if (blastType) {
                         setTimeout(() => this.muyu.classList.add('combo', blastType), 10);
@@ -1155,13 +1179,6 @@
                     meritGain = Math.floor(Math.random() * 100) + 50;
                     message = this.getRandomMessage('critical');
                     
-                    // 50%概率播放特殊音效，否则播放普通音效
-                    if (Math.random() < 0.5) {
-                        this.playSound('chanting');
-                    } else {
-                        this.playSound('critical');
-                    }
-                    
                     if (blastType) {
                         setTimeout(() => this.muyu.classList.add('critical', blastType), 10);
                     } else {
@@ -1169,8 +1186,12 @@
                     }
                     this.flashEffect.classList.add('active');
                     this.createParticles(15);
-                } else {
-                    this.playSound('normal');
+                }
+                
+                this.playSound(soundType);
+                
+                // 添加基础点击动画
+                if (!isCombo && !isCritical) {
                     setTimeout(() => this.muyu.classList.add('clicked'), 10);
                     this.createParticles(5);
                 }
@@ -1199,8 +1220,8 @@
                 const messages = {
                     normal: [
                         '南无阿弥陀佛', '功德+1', '心如止水', '佛光普照',
-                        '消除业障', '福慧双修', '一声木鱼，万事皆空',
-                        '禅心静虑', '慈悲为怀', '觉悟人生', '返璞归真'
+                        '消除业障', '一声木鱼，万事皆空',
+                        '禅心静虑', '慈悲为怀', '觉悟人生',
                     ],
                     critical: [
                         '老板暴毙，功德爆棚', 'KPI清零，天降福报', '论文自动写完',
@@ -1216,9 +1237,8 @@
                     ],
                     combo: [
                         '功德无量，原地飞升', '系统检测到您已开悟', '连击成佛',
-                        '梵音阵阵，功德连连', '佛法无边', '慧根深厚',
+                        '佛法无边', '慧根深厚',
                         '修为大进！', '道行日深！', '连击飞升，直达极乐',
-                        '禅定深入，智慧开启'
                     ]
                 };
                 
@@ -1239,17 +1259,19 @@
                 bubble.className = 'text-bubble';
                 bubble.textContent = `${message} +${meritGain}`;
                 
-                // 随机位置：上方180度扇形范围
+                // 以正上方90度为中心的140度扇形
                 const rect = this.muyu.getBoundingClientRect();
                 const centerX = rect.left + rect.width / 2;
                 const centerY = rect.top;
                 
-                // 生成-90度到+90度的随机角度（向上的180度扇形）
-                const angle = (Math.random() * 180 - 90) * Math.PI / 180;
+                // 140度扇形：从20度到160度（以90度正上方为中心±70度）
+                const minAngle = 20;  // 左边界
+                const maxAngle = 160; // 右边界
+                const angle = (minAngle + Math.random() * (maxAngle - minAngle)) * Math.PI / 180;
                 const distance = 50 + Math.random() * 100; // 50-150px的随机距离
                 
-                const x = centerX + Math.sin(angle) * distance;
-                const y = centerY - Math.abs(Math.cos(angle)) * distance;
+                const x = centerX + Math.cos(angle) * distance;
+                const y = centerY - Math.sin(angle) * distance;
                 
                 bubble.style.left = x + 'px';
                 bubble.style.top = y + 'px';
@@ -1314,15 +1336,48 @@
             }
 
             updateAchievements() {
-                // 修行者: 敲击100次
-                const achievement2 = Math.min(this.totalClicks, 100);
-                document.getElementById('achievement2').textContent = `${achievement2}/100`;
+                const achievements = [
+                    { name: '修行者', target: 100, position: 33.33 },
+                    { name: '大师', target: 1000, position: 66.66 },
+                    { name: '圣者', target: 3000, position: 100 }
+                ];
                 
-                // 大师: 敲击1000次
-                const achievement3 = Math.min(this.totalClicks, 1000);
-                document.getElementById('achievement3').textContent = `${achievement3}/1000`;
+                // 修复进度条显示逻辑
+                let overallProgress = 0;
+                if (this.totalClicks <= 100) {
+                    // 0-100: 0% - 33.33%
+                    overallProgress = (this.totalClicks / 100) * 33.33;
+                } else if (this.totalClicks <= 1000) {
+                    // 100-1000: 33.33% - 66.66%
+                    overallProgress = 33.33 + ((this.totalClicks - 100) / 900) * 33.33;
+                } else if (this.totalClicks <= 3000) {
+                    // 1000-3000: 66.66% - 100%
+                    overallProgress = 66.66 + ((this.totalClicks - 1000) / 2000) * 33.34;
+                } else {
+                    overallProgress = 100;
+                }
                 
-                // 佛光普照效果 (100次敲击后解锁)
+                const progressFill = document.querySelector('.progress-fill');
+                if (progressFill) {
+                    progressFill.style.width = `${overallProgress}%`;
+                    if (this.totalClicks >= 3000) {
+                        progressFill.classList.add('completed');
+                    }
+                }
+                
+                achievements.forEach((achievement, index) => {
+                    const node = document.querySelector(`[data-achievement="${index}"]`);
+                    const label = document.querySelector(`[data-label="${index}"]`);
+                    
+                    if (node && this.totalClicks >= achievement.target) {
+                        node.classList.add('completed');
+                    }
+                    if (label && this.totalClicks >= achievement.target) {
+                        label.classList.add('completed');
+                    }
+                });
+                
+                // 佛光普照效果
                 if (this.totalClicks >= 100) {
                     document.body.style.background = 'linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 50%, #3a2d1a 100%)';
                 }
@@ -1391,6 +1446,96 @@
                     this.muyu.classList.add('fallback');
                 };
                 testImg.src = './muyu.png';
+            }
+
+            // 音效类型确定
+            determineSoundType(isCombo, isCritical) {
+                let soundType = isCombo ? 'combo' : isCritical ? 'critical' : 'normal';
+                
+                // 权重均等机制
+                const minCount = Math.min(...Object.values(this.soundTypeCounter));
+                const leastUsed = Object.keys(this.soundTypeCounter).filter(
+                    type => this.soundTypeCounter[type] === minCount
+                );
+                
+                if (!leastUsed.includes(soundType) && Math.random() < 0.25) {
+                    soundType = leastUsed[Math.floor(Math.random() * leastUsed.length)];
+                }
+                
+                this.soundTypeCounter[soundType]++;
+                return soundType;
+            }
+
+            playSound(type = 'normal') {
+                if (!this.audioContext || this.isPlayingSound) return;
+                
+                this.isPlayingSound = true;
+                
+                if (type === 'chanting') {
+                    this.playChantingSound();
+                    return;
+                }
+                
+                const sound = this.sounds[type];
+                const oscillator = this.audioContext.createOscillator();
+                const gainNode = this.audioContext.createGain();
+                
+                oscillator.connect(gainNode);
+                gainNode.connect(this.audioContext.destination);
+                oscillator.frequency.setValueAtTime(sound.frequency, this.audioContext.currentTime);
+                oscillator.type = 'sine';
+                gainNode.gain.setValueAtTime(0.3, this.audioContext.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, this.audioContext.currentTime + sound.duration);
+                
+                oscillator.start(this.audioContext.currentTime);
+                oscillator.stop(this.audioContext.currentTime + sound.duration);
+                
+                setTimeout(() => { this.isPlayingSound = false; }, sound.duration * 1000);
+            }
+
+            playChantingSound() {
+                const sound = this.sounds.chanting;
+                const startTime = this.audioContext.currentTime;
+                
+                const baseOscillator = this.audioContext.createOscillator();
+                const baseGain = this.audioContext.createGain();
+                const harmonic1 = this.audioContext.createOscillator();
+                const harmonic1Gain = this.audioContext.createGain();
+                const subBass = this.audioContext.createOscillator();
+                const subGain = this.audioContext.createGain();
+                
+                baseOscillator.connect(baseGain);
+                baseGain.connect(this.audioContext.destination);
+                harmonic1.connect(harmonic1Gain);
+                harmonic1Gain.connect(this.audioContext.destination);
+                subBass.connect(subGain);
+                subGain.connect(this.audioContext.destination);
+                
+                baseOscillator.frequency.setValueAtTime(sound.baseFrequency, startTime);
+                baseOscillator.type = 'triangle';
+                harmonic1.frequency.setValueAtTime(sound.baseFrequency * 1.5, startTime);
+                harmonic1.type = 'sine';
+                subBass.frequency.setValueAtTime(sound.baseFrequency * 0.5, startTime);
+                subBass.type = 'sine';
+                
+                baseGain.gain.setValueAtTime(0, startTime);
+                baseGain.gain.linearRampToValueAtTime(0.1, startTime + 0.1);
+                baseGain.gain.exponentialRampToValueAtTime(0.001, startTime + sound.duration);
+                harmonic1Gain.gain.setValueAtTime(0, startTime);
+                harmonic1Gain.gain.linearRampToValueAtTime(0.05, startTime + 0.15);
+                harmonic1Gain.gain.exponentialRampToValueAtTime(0.001, startTime + sound.duration * 0.8);
+                subGain.gain.setValueAtTime(0, startTime);
+                subGain.gain.linearRampToValueAtTime(0.03, startTime + 0.05);
+                subGain.gain.exponentialRampToValueAtTime(0.001, startTime + sound.duration * 0.6);
+                
+                baseOscillator.start(startTime);
+                harmonic1.start(startTime);
+                subBass.start(startTime);
+                
+                setTimeout(() => {
+                    try { baseOscillator.stop(); harmonic1.stop(); subBass.stop(); } catch (e) {}
+                    this.isPlayingSound = false;
+                }, sound.duration * 1000);
             }
         }
 
@@ -1585,11 +1730,7 @@
             // 隐藏彩蛋，显示原LOGO
             const muyu = window.muyuInstance;
             if (muyu && muyu.easterEggActive) {
-                muyu.easterEggActive = false;
-                muyu.easterEggMessage.classList.remove('show');
-                setTimeout(() => {
-                    muyu.logoTitle.style.opacity = '1';
-                }, 300);
+                muyu.hideEasterEgg();
             }
         }
 
